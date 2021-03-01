@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes([
-    'register' => false
+    // 'register' => false
 ]);
 
 Route::get('/', function () {
@@ -24,3 +24,9 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Admin
+Route::name('admin.')->middleware('role:admin')->group(function () {
+    Route::view('rayon', 'admin.rayon.index')->name('rayon');
+});
