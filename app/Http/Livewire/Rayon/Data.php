@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Rayon;
+
 use App\Models\Rayon;
 use Livewire\WithPagination;
 use Livewire\Component;
@@ -11,11 +12,11 @@ class Data extends Component
 
     protected $listeners = ['refresh', 'delete'];
 
-    public function delete(Rayon $rayon) 
+    public function delete(Rayon $rayon)
     {
         $rayon->delete();
-		
-		$this->refresh('Sukses Menghapus Data');
+
+        $this->refresh('Sukses Menghapus Rayon');
     }
 
     public function refresh(string $message)
@@ -27,7 +28,7 @@ class Data extends Component
     {
         //get Data with paginate
         $rayons = $rayon->paginate(5);
-        
+
 
         return view('livewire.rayon.data', compact('rayons'));
     }
