@@ -10,6 +10,10 @@ class Rayon extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'pembimbing_id'
+    ];
+
     protected static function boot()
     {
         parent::boot();
@@ -25,5 +29,10 @@ class Rayon extends Model
     public function getKeyType()
     {
         return 'string';
+    }
+
+    public function pembimbing()
+    {
+        return $this->belongsTo(Pembimbing::class);
     }
 }
