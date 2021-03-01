@@ -33,4 +33,9 @@ class Pembimbing extends Model
     {
         return $this->hasOne(User::class, 'pemilik_id');
     }
+
+    public function rayon()
+    {
+        return $this->hasOne(Rayon::class);
+    }
 }
