@@ -20,14 +20,24 @@ Auth::routes([
 ]);
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        if (Auth::user()->hasRole('admin')) {
+            return redirect()->route('admin.home');
+        } else {
+            return redirect()->route('home');
+        }
+    }
+
+    return redirect()->route('login');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Admin
-Route::name('admin.')->middleware('role:admin')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::view('rayon', 'admin.rayon.index')->name('rayon');
     Route::view('major', 'admin.major.index')->name('major');
+    Route::view('rombel', 'admin.rombel.index')->name('rombel');
 });

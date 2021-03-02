@@ -28,4 +28,14 @@ class Major extends Model
     }
 
     protected $guarded = [];
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
+
+    public function rombel()
+    {
+        return $this->hasMany(Rombel::class, 'major_id');
+    }
 }
