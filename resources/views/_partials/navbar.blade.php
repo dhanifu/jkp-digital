@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a href="{{ route('admin.rayon') }}" class="nav-link">Rayon</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.major') }}" class="nav-link">Jurusan</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

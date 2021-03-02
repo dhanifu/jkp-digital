@@ -29,4 +29,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Admin
 Route::name('admin.')->middleware('role:admin')->group(function () {
     Route::view('rayon', 'admin.rayon.index')->name('rayon');
+    Route::view('major', 'admin.major.index')->name('major');
 });
