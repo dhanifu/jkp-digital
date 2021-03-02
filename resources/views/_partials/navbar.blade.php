@@ -10,12 +10,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                @role('admin')
                 <li class="nav-item">
                     <a href="{{ route('admin.rayon') }}" class="nav-link">Rayon</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.major') }}" class="nav-link">Jurusan</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.rombel') }}" class="nav-link">Jurusan</a>
+                </li>
+
+                @elserole('pembimbing')
+                    {{--  --}}
+
+                @elserole('student')
+                    {{--  --}}
+                    
+                @endrole
             </ul>
 
             <!-- Right Side Of Navbar -->

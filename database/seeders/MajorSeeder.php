@@ -29,28 +29,5 @@ class MajorSeeder extends Seeder
                 'name' => $jurusan[$i],
             ]);
         }
-
-        // Major::create([
-        //     'name' => 'Rekayasa Perangkat Lunak',
-        // ]);
-
-        // Major::create([
-        //     'name' => 'Teknik Komputer dan Jaringan'
-        // ]);
-        // Major::create([
-        //     'name' => 'Multimedia'
-        // ]);
-        // Major::create([
-        //     'name' => 'Bisnis Daring dan Pemasaran'
-        // ]);
-        // Major::create([
-        //     'name' => 'Otomatisasi Tata Kelola Perkantoran'
-        // ]);
-        // Major::create([
-        //     'name' => 'Tataboga'
-        // ]);
-        // Major::create([
-        //     'name' => 'Perhotelan'
-        // ]);
     }
 }

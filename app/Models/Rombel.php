@@ -28,4 +28,9 @@ class Rombel extends Model
     }
 
     protected $guarded = [];
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
 }
