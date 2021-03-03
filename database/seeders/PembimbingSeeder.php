@@ -17,7 +17,7 @@ class PembimbingSeeder extends Seeder
     {
         $user = User::create([
             'email' => 'pembimbing@jkp.com',
-            'password' => bcrypt('12345678'),
+            'password' => '12345678',
         ]);
         $user->assignRole('pembimbing');
 
