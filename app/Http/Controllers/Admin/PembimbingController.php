@@ -14,8 +14,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\File;
 
 use App\Models\Pembimbing;
+use App\Models\Rayon;
 use App\Models\User;
 
 class PembimbingController extends Controller
@@ -107,7 +109,14 @@ class PembimbingController extends Controller
      */
     public function edit(Pembimbing $pembimbing)
     {
-        //
+        $pembimbing2 = Rayon::select(['id', 'pembimbing_id', 'name'])
+            ->with('pembimbing')->where('pembimbing_id', $pembimbing->id)->get();
+        $rayon = [];
+        foreach ($pembimbing2 as $key => $value) {
+            $rayon[$key] = $value->name;
+        }
+        // dd($rayon);
+        return view('admin.pembimbing.edit', compact('pembimbing', 'rayon'));
     }
 
     /**
@@ -119,7 +128,33 @@ class PembimbingController extends Controller
      */
     public function update(UpdatePembimbingRequest $request, Pembimbing $pembimbing)
     {
-        //
+        try {
+            if (request()->delete_photo) {
+                File::delete(storage_path("app/public/photos/pembimbing/" . $pembimbing->photo));
+            }
+            $data = collect($request->except('photo', 'delete_photo'));
+            if ($request->hasFile('photo')) {
+                $file = $request->photo;
+                $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $fileName = $fileName . '_' . time() . '.' . $file->extension();
+
+                $file->storeAs('public/photos/pembimbing', $fileName);
+
+                File::delete(storage_path("app/public/photos/pembimbing/" . $pembimbing->photo));
+
+                $photo = $fileName;
+
+                $data = $data->merge([
+                    'photo' => $photo
+                ]);
+            }
+
+            $pembimbing->update($data->all());
+        } catch (\Exception $e) {
+            return back()->with("error", "Something went wrong");
+        }
+
+        return redirect()->route('admin.pembimbing.index')->with('success', 'Berhasil mengedit pembimbing');
     }
 
     /**

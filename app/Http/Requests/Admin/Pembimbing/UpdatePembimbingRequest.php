@@ -24,8 +24,6 @@ class UpdatePembimbingRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:pembimbings',
-            'nip' => 'required|string|unique:pembimbings,nip,' . $this->id,
             'name' => 'required|string',
             'agama' => 'required|in:Islam,Kristen,Budha,Hindu',
             'gender' => 'required|in:L,P',
