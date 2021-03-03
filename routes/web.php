@@ -40,4 +40,8 @@ Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function
     Route::view('rayon', 'admin.rayon.index')->name('rayon');
     Route::view('major', 'admin.major.index')->name('major');
     Route::view('rombel', 'admin.rombel.index')->name('rombel');
+
+    Route::resource('pembimbing', 'Admin\PembimbingController');
+    Route::post('pembimbing/datatables', 'Admin\PembimbingController@datatables')->name('pembimbing.datatables');
+    Route::post('pembimbing/import', 'Admin\PembimbingController@import')->name('pembimbing.import');
 });
