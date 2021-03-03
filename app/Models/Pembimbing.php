@@ -29,6 +29,14 @@ class Pembimbing extends Model
 
     protected $guarded = [];
 
+    public function getPhotoSrcAttribute()
+    {
+        if ($this->photo == null) {
+            return "<img src='" . folderStorage("photos/user.jpg") . "'/>";
+        }
+        return "<img src='" . folderStorage("photos/pembimbing/$this->photo") . "'/>";
+    }
+
     public function akun()
     {
         return $this->hasOne(User::class, 'pemilik_id');

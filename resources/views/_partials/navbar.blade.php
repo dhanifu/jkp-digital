@@ -20,6 +20,9 @@
                 <li class="nav-item">
                     <a href="{{ route('admin.rombel') }}" class="nav-link">Jurusan</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.pembimbing.index') }}" class="nav-link">Pembimbing</a>
+                </li>
 
                 @elserole('pembimbing')
                     {{--  --}}
