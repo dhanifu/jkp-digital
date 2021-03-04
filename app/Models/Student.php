@@ -33,4 +33,14 @@ class Student extends Model
     {
         return $this->hasOne(User::class, 'pemilik_id');
     }
+
+    public function rayon()
+    {
+        return $this->belongsTo(Rayon::class);
+    }
+
+    public function rombel()
+    {
+        return $this->belongsTo(Rombel::class);
+    }
 }

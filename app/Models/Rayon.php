@@ -35,4 +35,8 @@ class Rayon extends Model
     {
         return $this->belongsTo(Pembimbing::class);
     }
+
+    public function student(){
+        return $this->hasOne(Student::class);
+    }
 }
