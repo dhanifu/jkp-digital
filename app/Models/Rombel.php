@@ -33,4 +33,8 @@ class Rombel extends Model
     {
         return $this->belongsTo(Major::class);
     }
+
+    public function student(){
+        return $this->hasOne(Student::class);
+    }
 }
