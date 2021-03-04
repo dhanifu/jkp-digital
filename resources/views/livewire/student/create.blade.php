@@ -128,6 +128,14 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="form-group">
+                                <label>Foto</label>
+                                <input type="file" class="form-control @error('photo') is-invalid @enderror" wire:model="photo" name="photo">
+                                @error('photo')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <button class="btn btn-primary shadow" type="submit">Tambah</button>
                             
                         </div>        
