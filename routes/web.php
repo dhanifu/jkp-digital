@@ -40,6 +40,7 @@ Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function
     Route::view('rayon', 'admin.rayon.index')->name('rayon');
     Route::view('major', 'admin.major.index')->name('major');
     Route::view('rombel', 'admin.rombel.index')->name('rombel');
+    Route::view('student', 'admin.student.index')->name('student');
 
     Route::resource('pembimbing', 'Admin\PembimbingController');
     Route::get('cek-nip', 'Admin\PembimbingController@cekNip')->name('pembimbing.cek-nip');
