@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes([
-    // 'register' => false
+    'register' => false
 ]);
 
 Route::get('/', function () {
@@ -43,6 +43,7 @@ Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function
     Route::view('student', 'admin.student.index')->name('student');
 
     Route::resource('pembimbing', 'Admin\PembimbingController');
+    Route::get('cek-nip', 'Admin\PembimbingController@cekNip')->name('pembimbing.cek-nip');
     Route::post('pembimbing/datatables', 'Admin\PembimbingController@datatables')->name('pembimbing.datatables');
     Route::post('pembimbing/import', 'Admin\PembimbingController@import')->name('pembimbing.import');
 });
