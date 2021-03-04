@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\Admin\Pembimbing\CreatePembimbingRequest;
-use App\Http\Requests\Admin\Pembimbing\UpdatePembimbingRequest;
-
 use App\Imports\Admin\PembimbingImport;
 use Yajra\Datatables\DataTables;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -65,13 +63,18 @@ class PembimbingController extends Controller
         return $datatables;
     }
 
+    public function create()
+    {
+        return view('admin.pembimbing.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Admin\Pembimbing\CreatePembimbingRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePembimbingRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -126,8 +129,15 @@ class PembimbingController extends Controller
      * @param  \App\Models\Pembimbing  $pembimbing
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePembimbingRequest $request, Pembimbing $pembimbing)
+    public function update(Request $request, Pembimbing $pembimbing)
     {
+        $this->validate($request, [
+            'name' => 'required|string',
+            'agama' => 'required|in:Islam,Kristen,Budha,Hindu',
+            'gender' => 'required|in:L,P',
+            'photo' => 'image'
+        ]);
+
         try {
             if (request()->delete_photo) {
                 File::delete(storage_path("app/public/photos/pembimbing/" . $pembimbing->photo));
