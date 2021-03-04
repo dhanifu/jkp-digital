@@ -23,6 +23,7 @@
                         <h2 class="card-title h6 font-weight-bold text-primary m-0">Data Pemimbing</h2>
                         <div class="float-right">
                             <a href="javascript:void(0)" id="reloadTable" class="btn btn-success btn-sm">Reload</a>
+                            <a href="{{ route('admin.pembimbing.create') }}" class="btn btn-primary btn-sm">Add</a>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalExcel">
                                 Upload Excel
                             </button>
@@ -86,7 +87,6 @@
     <script>
         const ajaxUrl = '{{ route('admin.pembimbing.datatables') }}'
         const editUrl = '{{ route('admin.pembimbing.edit', ':id') }}'
-        const updateUrl = '{{ route('admin.pembimbing.update', ':id') }}'
         const deleteUrl = '{{ route('admin.pembimbing.destroy', ':id') }}'
         const csrf = '{{ csrf_token() }}'
         const reloadTable = document.getElementById('reloadTable')

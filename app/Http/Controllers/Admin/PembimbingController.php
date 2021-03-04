@@ -74,9 +74,63 @@ class PembimbingController extends Controller
      * @param  \App\Http\Requests\Admin\Pembimbing\CreatePembimbingRequest  $request
      * @return \Illuminate\Http\Response
      */
+    public function cekNip(Request $request)
+    {
+        $cek = Pembimbing::select(['id', 'nip'])->where('nip', $request->nip)->count();
+
+        $response = '<span class="text-success">Available.</span>';
+
+        if ($cek > 0) {
+            $response = '<span class="text-danger">Not Available.</span>';
+            return response()->json(['invalid' => $response]);
+        }
+
+        return response()->json(['valid' => $response]);
+    }
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'nip' => 'required|string|min:12|max:18|unique:pembimbings',
+            'agama' => 'required|in:Islam,Kristen,Budha,Hindu',
+            'gender' => 'required|in:L,P',
+            'photo' => 'image'
+        ]);
+
+        $data_pembimbing = collect($request->except(['photo', 'email', 'password', '_token', 'password_confirmation']));
+        $data_user = collect($request->except(['name', 'nip', 'agama', 'gender', 'photo', 'password_confirmation', '_token']));
+
+        // try {
+        if ($request->hasFile('photo')) {
+            $file = $request->photo;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $fileName = $fileName . '_' . time() . '.' . $file->extension();
+
+            $file->storeAs('public/photos/pembimbing', $fileName);
+
+            $photo = $fileName;
+
+            $data_pembimbing = $data_pembimbing->merge([
+                'photo' => $photo
+            ]);
+        }
+
+        $user = User::create($data_user->all());
+        $user->assignRole('pembimbing');
+
+        $data_pembimbing = $data_pembimbing->merge([
+            'user_id' => $user->id
+        ]);
+        $pembimbing = Pembimbing::create($data_pembimbing->all());
+
+        $user->update(['pemilik_id' => $pembimbing->id]);
+        // } catch (\Exception $ex) {
+        //     return back()->with('error', 'Something Wrong, please reinput form');
+        // }
+
+        return redirect()->route('admin.pembimbing.index')->with('success', 'Berhasil menambah Pembimbing');
     }
 
     // Import From Excel
