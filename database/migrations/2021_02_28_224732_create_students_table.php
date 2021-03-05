@@ -18,8 +18,8 @@ class CreateStudentsTable extends Migration
             $table->uuid('user_id'); // Akun
             $table->string('nis', 8)->unique();
             $table->string('name');
-            $table->uuid('rayon_id');
-            $table->uuid('rombel_id');
+            $table->uuid('rayon_id')->nullable();
+            $table->uuid('rombel_id')->nullable();
             $table->enum('kelas', [10, 11, 12]);
             $table->enum('agama', ['Islam', 'Kristen', 'Budha', 'Hindu']);
             $table->enum('gender', ['L', 'P']);

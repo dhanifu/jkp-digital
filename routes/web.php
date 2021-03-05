@@ -46,4 +46,9 @@ Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function
     Route::get('cek-nip', 'Admin\PembimbingController@cekNip')->name('pembimbing.cek-nip');
     Route::post('pembimbing/datatables', 'Admin\PembimbingController@datatables')->name('pembimbing.datatables');
     Route::post('pembimbing/import', 'Admin\PembimbingController@import')->name('pembimbing.import');
+
+    Route::resource('student', 'Admin\StudentController');
+    Route::get('cek-nis', 'Admin\StudentController@cekNis')->name('student.cek-nis');
+    Route::post('student/datatables', 'Admin\StudentController@datatables')->name('student.datatables');
+    Route::post('student/import', 'Admin\StudentController@import')->name('student.import');
 });
