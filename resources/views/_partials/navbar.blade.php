@@ -21,7 +21,7 @@
                     <a href="{{ route('admin.rombel') }}" class="nav-link">Rombel</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.student') }}" class="nav-link">Siswa</a>
+                    <a href="{{ route('admin.student.index') }}" class="nav-link">Siswa</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.pembimbing.index') }}" class="nav-link">Pembimbing</a>
