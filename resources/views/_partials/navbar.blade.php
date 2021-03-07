@@ -26,6 +26,9 @@
                 <li class="nav-item">
                     <a href="{{ route('admin.pembimbing.index') }}" class="nav-link">Pembimbing</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.assignment') }}" class="nav-link">Assignment</a>
+                </li>
 
                 @elserole('pembimbing')
                     {{--  --}}

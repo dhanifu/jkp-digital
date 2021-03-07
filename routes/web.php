@@ -35,7 +35,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Admin
-Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::view('rayon', 'admin.rayon.index')->name('rayon');
     Route::view('major', 'admin.major.index')->name('major');
@@ -51,4 +51,6 @@ Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function
     Route::get('cek-nis', 'Admin\StudentController@cekNis')->name('student.cek-nis');
     Route::post('student/datatables', 'Admin\StudentController@datatables')->name('student.datatables');
     Route::post('student/import', 'Admin\StudentController@import')->name('student.import');
+
+    Route::view('assignment', 'admin.assignment.index')->name('assignment');
 });
