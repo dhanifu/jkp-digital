@@ -1,9 +1,7 @@
 @extends('_layouts.app')
-
+@section('title' , 'Rombel')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <livewire:rombel.data>
-    </div>
+<div class="justify-content-center">
+    <livewire:rombel.data>
 </div>
 @endsection

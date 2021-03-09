@@ -1,9 +1,7 @@
 @extends('_layouts.app')
-
+@section('title', 'Rayon')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <livewire:rayon.data>
-    </div>
+<div class="justify-content-center">
+    <livewire:rayon.data>
 </div>
 @endsection

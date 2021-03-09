@@ -1,9 +1,9 @@
-<div class="row">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-	<div class="col-sm-4 mb-4">
+	<div class="mb-4">
 		<livewire:rombel.create />
 	</div>
-	<div class="col-sm-8">
+	<div>
 		@if (session()->has('success'))
 			<div class="alert alert-success alert-dismissible">
 				<span>{{ session('success') }}</span>

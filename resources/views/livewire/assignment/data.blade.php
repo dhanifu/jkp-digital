@@ -1,10 +1,10 @@
-<div class="row">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
 
-    <div class="col-sm-5 mb-4">
+    <div class="mb-4">
         <livewire:assignment.create />
     </div>
-    <div class="col-sm-7">
+    <div>
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible">
                 <span>{{ session('success') }}</span>
