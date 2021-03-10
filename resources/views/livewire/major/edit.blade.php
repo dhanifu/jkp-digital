@@ -2,7 +2,7 @@
     @if ($isOpen)
     <div class="modal backdrop d-block">
         <div class="modal-backdrop" style="background: rgba(0,0,0,.5);">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <form wire:submit.prevent="update">
                         <div class="modal-header">
