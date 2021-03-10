@@ -1,5 +1,5 @@
 @extends('_layouts.app')
-
+@section('title' , 'Siswa')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

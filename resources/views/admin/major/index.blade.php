@@ -1,9 +1,7 @@
 @extends('_layouts.app')
-
+@section('title', 'Jurusan')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <livewire:major.data>
-    </div>
+<div class="justify-content-center">
+    <livewire:major.data>
 </div>
 @endsection

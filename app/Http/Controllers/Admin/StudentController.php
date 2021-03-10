@@ -145,7 +145,7 @@ class StudentController extends Controller
         } catch (\Error $er) {
             return back()->with(['error' => "Something went wrong. Check your file"]);
         }
-        return back()->with(['success' => "Berhasil diimport, Segera update data siswa!"]);
+        return back()->with(['success' => "Berhasil diimport, segera update data siswa!"]);
     }
 
     /**

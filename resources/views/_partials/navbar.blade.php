@@ -1,85 +1,29 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-                @role('admin')
-                <li class="nav-item">
-                    <a href="{{ route('admin.rayon') }}" class="nav-link">Rayon</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.major') }}" class="nav-link">Jurusan</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.rombel') }}" class="nav-link">Rombel</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.student.index') }}" class="nav-link">Siswa</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.pembimbing.index') }}" class="nav-link">Pembimbing</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.assignment') }}" class="nav-link">Assignment</a>
-                </li>
-
-                @elserole('pembimbing')
-                    {{--  --}}
-
-                @elserole('student')
-                    {{--  --}}
-                    
-                @endrole
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-                    
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            @role('admin')
-                            {{ Auth::user()->admin->name }}
-                            @elserole('pembimbing')
-                            {{ Auth::user()->pembimbing->name }}
-                            @elserole('student')
-                            {{ Auth::user()->student->name }}
-                            @endrole
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
+<span class="menu-icon icon-nav remove"><i class="fas fa-times" ></i></span>
+<div class="top-navbar">
+    <div class="top-menu">
+        <span class="icon-nav menu-icon"><i class="fas fa-bars" ></i></span>
+        <span class="dash">
+            <span class="title">@yield('title')</span>
+        </span>
+        <div class="right-info">
+            <div class="flex items-center">
+                <p class="text-sm mr-2 text-white">@role('admin')
+                    {{ Auth::user()->admin->name }}
+                    @elserole('pembimbing')
+                    {{ Auth::user()->pembimbing->name }}
+                    @elserole('student')
+                    {{ Auth::user()->student->name }}
+                    @endrole</p>
+                <div>
+                    <a href="{{ route('logout') }}" class="icon-nav hover:no-underline"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                    ><i class="fas fa-power-off"></i></i></a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    </div><!-- top-menu -->
+</div><!-- top-navbar -->
