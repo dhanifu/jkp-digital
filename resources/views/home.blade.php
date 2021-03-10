@@ -13,8 +13,7 @@
                     </div>
                 @endif
 
-                {{ __('You are logged in!') }}
-                Your Role is {{ Auth::user()->getRoleNames() }}
+                Segala aktivitas yang Anda lakukan di area ini menjadi tanggung jawab anda sepenuhnya. Silahkan lakukan dengan teliti dan benar.
             </div>
         </div>
     </div>
