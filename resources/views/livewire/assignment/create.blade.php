@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="from_date">Dari tanggal</label>
-                        <input type="date" wire:model="from_date" class="form-control @error('from_date') is-invalid @enderror"
+                        <input type="datetime-local" wire:model="from_date" class="form-control @error('from_date') is-invalid @enderror"
                             id="from_date">
                         @error('from_date')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="to_date">Sampai tanggal</label>
-                        <input type="date" wire:model="to_date" class="form-control @error('to_date') is-invalid @enderror"
+                        <input type="datetime-local" wire:model="to_date" class="form-control @error('to_date') is-invalid @enderror"
                             id="to_date">
                         @error('to_date')
                             <span class="invalid-feedback">{{ $message }}</span>
