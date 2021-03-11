@@ -9,7 +9,7 @@ function folderStorage(string $direktori)
 
 function tanggalBulan($date)
 {
-    return date('d M', strtotime($date));
+    return date('d F', strtotime($date));
 }
 
 function tanggal($date)
@@ -19,7 +19,7 @@ function tanggal($date)
 
 function tambahTujuhHari($date)
 {
-    return date('Y-m-d', strtotime('+7 days', strtotime($date)));
+    return date('Y-m-d H:i:s', strtotime('+7 days', strtotime($date)));
 }
 
 function profileImage()
