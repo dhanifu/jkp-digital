@@ -23,5 +23,31 @@
 
 <!-- Livewire Style -->
 <livewire:styles />
-
+<style>
+    .btn-circle.btn-sm { 
+        width: 35px; 
+        height: 35px; 
+        padding: 6px 0px;
+        border-radius: 15px;
+        font-size: 12px; 
+        text-align: center; 
+    } 
+    .btn-circle.btn-md { 
+        width: 40px; 
+        height: 40px; 
+        padding: 10px 10px; 
+        margin-top: 5px;
+        border-radius: 25px; 
+        font-size: 10px; 
+        text-align: center; 
+    } 
+    .btn-circle.btn-xl { 
+        width: 70px; 
+        height: 70px; 
+        padding: 10px 16px; 
+        border-radius: 35px; 
+        font-size: 12px; 
+        text-align: center; 
+    } 
+</style>
 @stack('css')
