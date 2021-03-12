@@ -75,7 +75,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('student.assignment.index') }}" class="{{ request()->is('assignments')? ' active' : '' }}">
+                        <a href="{{ route('student.assignment.index') }}" class="{{ request()->is('assignments/*')? ' active' : '' }}">
                             <span class="icon{{ request()->is('assignments')? ' active' : '' }}">
                                 <i class="fas fa-tasks"></i>
                             </span>
