@@ -60,7 +60,28 @@
                 {{--  --}}
 
                 @elserole('student')
-                {{--  --}}
+                    <li>
+                        <a href="{{ route('home') }}" class="{{ request()->is('home')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('home')? ' active' : '' }}"><i class="fas fa-tachometer-alt" aria-hidden="true"></i></span>
+                            <span class="list">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('student.to-do.index') }}" class="{{ request()->is('to-do')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('to-do')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">To-do</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('student.assignment.index') }}" class="{{ request()->is('assignments/*')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('assignments')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">Assignments</span>
+                        </a>
+                    </li>
                 @endrole
             </ul>
         </div>

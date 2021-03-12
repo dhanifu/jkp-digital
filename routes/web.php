@@ -54,3 +54,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(
 
     Route::view('assignment', 'admin.assignment.index')->name('assignment');
 });
+
+Route::name('student.')->middleware('role:student')->group(function () {
+    Route::view('to-do', 'student.todo.index')->name('to-do.index');
+    Route::view('assignments', 'student.assignment.index')->name('assignment.index');
+    Route::view('assignments/{id}/detail', 'student.assignment.detail')->name('assignments.detail');
+});

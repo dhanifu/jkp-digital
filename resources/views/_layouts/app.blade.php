@@ -10,7 +10,7 @@
     </div>
 
     <div class="main-container">
-        <div class="z-10 w-full p-4 md:p-6">
+        <div class="z-10 w-full py-4 px-1 md:p-6">
             @yield('content')
         </div>
     </div>

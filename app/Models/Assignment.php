@@ -30,4 +30,9 @@ class Assignment extends Model
     }
 
     protected $guarded = [];
+
+    public function jkp()
+    {
+        return $this->hasMany(Jkp::class);
+    }
 }
