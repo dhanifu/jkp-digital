@@ -18,7 +18,7 @@
             </div>
         @endif
         <div class="card shadow">
-            <div class="card-header py-3">
+            <div class="card-header py-3" wire:click="$emit('refreshData')">
                 <h2 class="card-title h6 font-weight-bold text-primary m-0">Assignment</h2>
             </div>
             <div class="card-body">

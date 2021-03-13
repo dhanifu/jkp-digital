@@ -11,7 +11,7 @@ class Data extends Component
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
-    protected $listeners = ['refresh', 'delete'];
+    protected $listeners = ['refresh', 'delete', 'refreshData' => '$refresh'];
 
     public function delete(Assignment $assignment)
     {
