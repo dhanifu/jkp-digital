@@ -24,7 +24,7 @@
                                     <p>{{ $a->created_at->format('d F') }}</p>
                                 </div>
                                 <div class="float-right">
-                                    <button class="btn btn-light btn-circle btn-md">
+                                    <button class="btn btn-light btn-circle btn-md" onclick="detail('{{$a->id}}')">
                                         <i class="fas fa-chevron-right fa-lg"></i>
                                     </button>
                                 </div>
@@ -44,3 +44,14 @@
         </div>
     </div>
 </div>
+
+
+@push('script')
+    <script>
+        function detail(id){
+            url = '{{ route('student.assignments.detail', ':id') }}'
+            url = url.replace(':id', id)
+            document.location.href=url
+        }
+    </script>
+@endpush

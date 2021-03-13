@@ -48,8 +48,8 @@ class AutoAssignment extends Command
         $assignmentLatest = Assignment::latest()->first();
 
         $minggu_ke = strval($assignmentLatest->minggu_ke + 1);
-        $from_date = tambahTujuhHari($assignmentLatest->from_date);
-        $to_date = tambahTujuhHari($assignmentLatest->to_date);
+        $from_date = date('Y-m-d H:i:s', strtotime('+7 days', strtotime($assignmentLatest->from_date)));
+        $to_date = date('Y-m-d H:i:s', strtotime('+7 days', strtotime($assignmentLatest->to_date)));
 
         // Buat assignment nya
         $assignment = Assignment::create([

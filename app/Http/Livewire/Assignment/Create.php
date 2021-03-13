@@ -21,6 +21,8 @@ class Create extends Component
     public function store()
     {
         $data = $this->validate();
+        $data["from_date"] = date('Y-m-d H:i:00', strtotime($data["from_date"]));
+        $data["to_date"] = date('Y-m-d H:i:59', strtotime($data["to_date"]));
 
         $assignment = Assignment::create($data);
 
