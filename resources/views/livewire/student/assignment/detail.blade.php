@@ -10,34 +10,47 @@
                             </strong>
                             <div class="h6 text-dark">
                                 <span style="font-weight: 500">JKP Digital • {{ $assignment->created_at->format('M d') }}</span>
-                                <div class="float-right">
-                                    <span>{!! $due_date !!}</span>
-                                </div>
+                                <span class="float-right">
+                                    {!! dueDate($assignment->to_date) !!}
+                                </span>
                             </div>
                         </div>
                     </div>
 
                     <div class="card shadow mt-4">
-                        <form>
-                            <div class="card-header border-0" style="background: #fff">
-                                <div class="card-title">
-                                    <div class="float-left"><span style="font-size: 20px;">Your Work</span></div>
-                                    <div class="float-right"><span style="font-size: 16px">ex. Turned in late</span></div>
-                                </div>
+                        <div class="card-header border-0" style="background: #fff">
+                            <div class="card-title">
+                                <div class="float-left"><span style="font-size: 20px;">Your Work</span></div>
+                                <div class="float-right"><span style="font-size: 16px;">{!! $turned_in !!}</span></div>
                             </div>
-                            <div class="container">
-                                <div class="form-group files">
-                                    <input type="file" class="form-control" wire:model="file">
-                                </div>
+                        </div>
+                        @if($formHide == false)
+                            @livewire('student.assignment.upload', ['assignment_id' => $assignment->id])
+                        @else
+                            <div class="card-body">
+                                @if (session()->has('success'))
+                                    <div class="alert alert-success alert-dismissible">
+                                        <span>{{ session('success') }}</span>
+                                        <button class="close" data-dismiss="alert">&times;</button>
+                                    </div>
+                                @endif
+                                <a href="{{ asset('storage/jkp/'.$jkp->file) }}" class="text-blue-700" target="_blank">{{ $jkp->file }}</a>
+                                <br><br>
+                                <button class="btn bg-red-600 text-white rounded" onclick="remove()" wire:click="$emit('delete', '{{ $jkp->id }}')">Unsubmit</button>
                             </div>
-
-                            <div class="px-4 pb-4 ">
-                                <button type="submit" class="px-4 py-1 bg-blue-600 text-white rounded">Submit</button>
-                            </div>
-                        </form>
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@push('script')
+	<script>
+		const remove = function () {
+			return confirm('Apakah Anda Yakin?') || event.stopImmediatePropagation()
+		}
+	</script>
+@endpush

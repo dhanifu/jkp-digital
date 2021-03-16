@@ -3,35 +3,62 @@
 namespace App\Http\Livewire\Student\Assignment;
 
 use App\Models\Assignment;
-use DateTime;
-use Illuminate\Http\Request;
+use App\Models\Jkp;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 
 class Detail extends Component
 {
-    protected $listeners = ['refreshDetail' => '$refresh'];
+    // nilainya dari views/student/assignment/detail
+    public $assignment_id;
+    public $formHide = false;
 
-    public function render(Request $request)
+    protected $listeners = [
+        'refreshDetail' => '$refresh',
+        'delete',
+        'hideForm',
+        'showForm',
+    ];
+
+    public function delete(Jkp $jkp)
     {
-        $assignment = Assignment::find($request->id);
-        $current = strtotime(date('Y-m-d H:i:s'));
-        $date = strtotime($assignment->to_date);
+        $jkp->delete();
+        File::delete(storage_path("app/public/jkp/" . $jkp->file));
 
-        $datediff = $date - $current;
-        $difference = floor($datediff / (60 * 60 * 24));
-        $due_date = '';
+        $this->showForm();
+    }
 
-        if ($difference == 0) {
-            $due_date = '<span class="font-weight-bold">Due Today, ' . date('h:i A', $date) . '</span>';
-        } elseif ($difference > 1) {
-            $due_date = '<span class="font-weight-bold">' . date('d F, h:i A', $date) . '</span>';
-        } elseif ($difference > 0) {
-            $due_date = '<span class="font-weight-bold">Due Tomorrow, ' . date('h:i A', $date) . '</span>';
-        } elseif ($difference < -1) {
-            $due_date = '<span class="text-danger font-weight-bold">Missing</span>';
+    public function hideForm()
+    {
+        $this->formHide = true;
+        $this->emit('$refresh');
+    }
+
+    public function showForm()
+    {
+        $this->formHide = false;
+        $this->emit('$refresh');
+    }
+
+    public function render()
+    {
+        $assignment_id = $this->assignment_id;
+
+        $assignment = Assignment::find($assignment_id);
+        $jkp = Jkp::where('assignment_id', $assignment_id)->where('user_id', Auth::user()->id)->first();
+
+        $turned_in = '';
+
+        if (!empty($jkp)) {
+            $this->hideForm();
+            $turned_in = '<span class="font-weight-bold text-dark">Turned in</span>';
         } else {
-            $due_date = '<span class="text-danger font-weight-bold">Missing</span>';
+            $this->showForm();
+            $turned_in = '<span class="font-weight-bold text-success">Assigned</span>';
         }
-        return view('livewire.student.assignment.detail', compact('assignment', 'due_date'));
+
+
+        return view('livewire.student.assignment.detail', compact('assignment', 'jkp', 'turned_in'));
     }
 }
