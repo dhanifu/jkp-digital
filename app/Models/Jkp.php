@@ -10,27 +10,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jkp extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
             $model->created_by = Auth::user()->id;
-            $model->{$model->getKeyName()} = Str::uuid()->toString();
-        });
-
-        static::creating(function ($model) {
             $model->user_id = Auth::user()->id;
             $model->{$model->getKeyName()} = Str::uuid()->toString();
         });
 
         static::updating(function ($model) {
             $model->updated_by = Auth::user()->id;
-        });
-
-        static::deleting(function ($model) {
-            $model->deleted_by = Auth::user()->id;
         });
     }
 
@@ -45,7 +37,6 @@ class Jkp extends Model
     }
 
     protected $guarded = [];
-    protected $dates = ['deleted_at'];
 
     public function assignment()
     {
