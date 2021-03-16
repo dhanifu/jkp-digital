@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 <link rel="stylesheet" href="{{asset('css/content.css')}}">
 <link rel="stylesheet" href="{{asset('css/tailwind.css')}}">
+<link rel="stylesheet" href="{{asset('css/upload.css')}}">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <title>Document</title>
