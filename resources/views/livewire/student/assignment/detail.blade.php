@@ -17,17 +17,24 @@
                         </div>
                     </div>
 
-
                     <div class="card shadow mt-4">
-                        <div class="card-header border-0" style="background: #fff">
-                            <div class="card-title">
-                                <div class="float-left"><span style="font-size: 20px;">Your Work</span></div>
-                                <div class="float-right"><span style="font-size: 16px">ex. Turned in late</span></div>
+                        <form>
+                            <div class="card-header border-0" style="background: #fff">
+                                <div class="card-title">
+                                    <div class="float-left"><span style="font-size: 20px;">Your Work</span></div>
+                                    <div class="float-right"><span style="font-size: 16px">ex. Turned in late</span></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            file here
-                        </div>
+                            <div class="container">
+                                <div class="form-group files">
+                                    <input type="file" class="form-control" wire:model="file">
+                                </div>
+                            </div>
+
+                            <div class="px-4 pb-4 ">
+                                <button type="submit" class="px-4 py-1 bg-blue-600 text-white rounded">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
