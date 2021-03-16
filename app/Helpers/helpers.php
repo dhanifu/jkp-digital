@@ -88,3 +88,25 @@ function getEmail()
 
     return $email;
 }
+
+function dueDate($due_date)
+{
+    $current = strtotime(date('Y-m-d H:i:s'));
+    $date = strtotime($due_date);
+
+    $datediff = $date - $current;
+    $difference = floor($datediff / (60 * 60 * 24));
+    $result = '';
+
+    if ($difference == 0) {
+        $result = '<span class="font-weight-bold">Due Today, ' . date('h:i A', $date) . '</span>';
+    } elseif ($difference > 1) {
+        $result = '<span class="font-weight-bold">' . date('d F, h:i A', $date) . '</span>';
+    } elseif ($difference > 0) {
+        $result = '<span class="font-weight-bold">Due Tomorrow, ' . date('h:i A', $date) . '</span>';
+    } else {
+        $result = '<span class="font-weight-bold">' . date('d F, h:i A', $date) . '</span>';
+    }
+
+    return $result;
+}
