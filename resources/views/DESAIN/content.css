@@ -1,0 +1,325 @@
+/*  DASHBOARD--------------------------------------------------------------------------------------*/
+/* content--------------------------- */
+.main-container .row{
+    display: flex;
+    
+}
+p{
+    font-size: 12px;
+    color: rgba(0,0,0,.7);
+}
+h4{
+    font-size: 15px;
+    color: #303f9f;
+}
+.content-item{
+    margin-top: 80px;
+    width: 35%;
+    z-index: 1;
+    
+}
+.main-container .row .content-item > .item{
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+/* ITEM PROFILE ---------------------------------------------------*/
+.main-container .row .content-item .item.profile{
+    height: 200px;
+    background: white;
+    
+}
+.main-container .row .content-item .item.profile .photo-porofile{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    top: -50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    border-top: 8px solid #fffcfd;
+    border-bottom: 8px solid #6777ef;
+    border-left: 8px solid #ffffff;
+    border-right: 8px solid #6777ef;
+}
+.main-container .row .content-item .item.profile .deskripsi-profile-1{
+    position: relative;
+    top: -30px;
+    text-align: center;
+}
+.main-container .row .content-item .item.profile .deskripsi-profile-1 h3{
+    font-size: 18px;
+    font-family: 'Arial Narrow', sans-serif;
+}
+.main-container .row .content-item .item.profile .group{
+    display: flex;
+    margin-top: 10px;
+}
+.main-container .row .content-item .item.profile .desc{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    border-right: 1px solid #6777ef;
+    
+}
+.main-container .row .content-item .item.profile .desc:last-child{
+    border-right: 1px solid #ffffff;
+    
+    
+}
+/* ITEM NOTIFICATION ---------------------------------------------------*/
+.main-container .row .content-item .item.nontification{
+    height: 380px;
+    background: white;
+    margin-top: 50px;
+    padding: 10px;
+    position: relative;
+}
+.main-container .row .content-item .item.nontification > h4{
+    position: relative;
+    top: -35px;
+    margin-left: 15px;
+}
+.main-container .row .content-item .item.nontification .header-notif{
+    border-bottom: 1px solid #d8c2fd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.main-container .row .content-item .item.nontification .header-notif p{
+    font-size: 14px;
+    color: #6777ef;
+    
+    margin-left: 20px;
+}
+.main-container .row .content-item .item.nontification .header-notif::after{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 29px;
+    left: 10px;
+    border-radius: 50%;
+    border: 3px solid #6777ef;
+
+}
+.main-container .row .content-item .item.nontification .content-notif{
+    display: flex;
+    flex-direction: column;
+}
+.main-container .row .content-item .item.nontification .content-notif .item{
+    position: relative;
+    display: flex;
+    background: linear-gradient(180deg, #d8c2fd, #d6dafa);
+    padding: 10px 0;
+    margin: 5px 0;
+    border-radius: 10px;
+
+}
+.main-container .row .content-item .item.nontification .content-notif .item > span{
+    font-size: 30px;
+    padding: 0 20px;
+    margin-right: 10px;
+    border-right: 1px solid white;
+    color: white;
+
+}
+.main-container .row .content-item .item.nontification .footer-notif a{
+    right: 0;
+    width: 100%;
+    display: block;
+    text-align: right;
+    padding: 10px 10px;
+}
+/* ITEM MAIN ---------------------------------------------------*/
+.main-container .row .item.main{
+    position: relative;
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-top-left-radius: 20px;
+}
+.main-container .row .item.main .row{
+    display: flex;
+    margin: 50px 0px;
+    margin-left: 20px;
+}
+.main-container .row .item.main .row .item{
+    width: 50%;
+    height: 100px;
+    border-radius: 5px;
+    margin-right: 20px;
+    position: absolute;
+    display: flex;
+}
+.main-container .row .item.main .row .item.qyt-1{
+    background: linear-gradient(45deg,#4facfe,#00f2fe)!important;
+    position: relative;
+}
+.main-container .row .item.main .row .item.qyt-2{
+    background: linear-gradient(45deg,#f54ea2,#ff7676)!important;
+    position: relative;
+}
+.main-container .row .item.main .row .item span{
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-self: center;
+    padding: 0 20px;
+    
+}
+.main-container .row .item.main .row .item span i{
+    padding-right: 20px;
+    font-size: 50px;
+    margin: auto 0;
+    color: white;
+    border-right: 1px solid white; 
+
+}
+.main-container .row .item.main .row .item .keterangan{
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.main-container .row .item.main .row .item .keterangan b{
+    font-size: 23px;
+}
+.main-container .row .item.main .row .item .keterangan h4{
+    color: white;
+}
+
+/* ITEM MAIN PROGRESS BAR ------------------------------------------------------- */
+.main-container .row .item.main .qty-3{
+    width: 90%;
+    background-color: #ffffff;
+    margin: auto;
+    border-radius: 10px;
+    padding: 10px;
+}
+.main-container .row .item.main .qty-3  > h4{
+    padding-bottom: 10px;
+}
+.main-container .row .item.main .qty-3 .item{
+    padding: 23px 0;
+    display: flex;
+    width: 100%;
+    border-top: 1px solid #e4d6fd;
+}
+.main-container .row .item.main .qty-3 .item > div{
+    width: 100%;
+}
+.main-container .row .item.main .qty-3 .item > div h4{
+    color: #925df0;
+}
+.main-container .row .item.main .qty-3 .item > span{
+    font-size: 30px;
+    color:  #d8c2fd;
+    margin-right: 20px;
+
+}
+.main-container .row .item.main .qty-3 .progress-wrap{
+    display: block;
+    height: 12px;
+    border-radius: 50px;
+    box-shadow: 0px 0px 1px 0.25px #2575fc;
+    margin-top: 10px;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+.main-container .row .item.main .qty-3 .progress-wrap .progress-bar{
+    width: 0;
+    height: 60%;
+    background-color: blue;
+    position: relative;
+    margin-left: 3px;
+    transition: all 1s ease-in-out;
+}
+.main-container .row .item.main .qty-3 .long-1 .progress-bar{
+    background: linear-gradient(5deg ,#ee0979,#ff6a00)!important;
+}
+.main-container .row .item.main .qty-3 .long-2 .progress-bar{
+    background: linear-gradient(5deg ,#11998e,#38ef7d)!important;
+}
+.main-container .row .item.main .qty-3 .long-3 .progress-bar{
+    background: linear-gradient(5deg ,#fa709a,#fee140)!important;
+}
+.main-container .row .item.main .qty-3 .long-4 .progress-bar{
+    background: linear-gradient(5deg ,#4facfe,#00f2fe)!important;
+}
+.main-container .row .item.main .qty-3 .long-5 .progress-bar{
+    background: linear-gradient(5deg ,#6a11cb,#2575fc)!important;
+}
+.main-container .row .item.main .qty-3 .progress-wrap .progress-bar .tooltip{
+    position: absolute;
+    right: 0;
+    top: -35px;
+    font-size: 13px;
+
+    background-color: #d8c2fd;
+    padding: 5px;
+    
+}
+.main-container .row .item.main .qty-3 .progress-wrap .progress-bar .tooltip::after{
+    content: "";
+    position: absolute;
+    display: flex;
+    justify-content: center;
+
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 5px solid #d8c2fd;
+    width: 0;
+    height: 0;
+    bottom: -5px;
+    left: 0;
+
+}
+
+/*  TABLE --------------------------------------------------------------------------------------*/
+/* table */
+.content-table {
+    position: relative;
+    width: 100%;
+    left: 0;
+    top: 30px;
+    padding: 0 20px;
+    /* padding-bottom: 10px; */
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-transition: all 0.5s;
+    margin-bottom: 10px;
+   
+}
+.content-tb2{
+    padding: 10px 0;
+}
+.content-table .header-content-table h4{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height:40px;
+    font-size: 18px;
+
+}
+.content-table .header-content-table .tombol-card.card-minus{
+    display: none;
+}
+.content-table .header-content-table .tombol-card{
+    display: block;
+    cursor: pointer;
+    /* background-color: #303f9f; */
+    margin-bottom: 20px;
+    text-align: right;
+    border-bottom: 1px solid #cccace;
+    padding: 12px 10px;
+}
