@@ -34,7 +34,11 @@
                                         <button class="close" data-dismiss="alert">&times;</button>
                                     </div>
                                 @endif
-                                <a href="{{ asset('storage/jkp/'.$jkp->file) }}" class="text-blue-700" target="_blank">{{ $jkp->file }}</a>
+
+                                <a href="{{ jkp($assignment->minggu_ke, $jkp->user->student->rayon->name, $jkp->file) }}" 
+                                    class="text-blue-700" target="_blank">
+                                    {{ $jkp->file }}
+                                </a>
                                 <br><br>
                                 <button class="btn bg-red-600 text-white rounded" onclick="remove()" wire:click="$emit('delete', '{{ $jkp->id }}')">Unsubmit</button>
                             </div>

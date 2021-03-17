@@ -23,8 +23,14 @@ class Detail extends Component
 
     public function delete(Jkp $jkp)
     {
+        $jkp = $jkp->with(['assignment:id,minggu_ke', 'user.student.rayon:id,name'])->first();
+
+        $minggu_ke = $jkp->assignment->minggu_ke;
+        $rayon = $jkp->user->student->rayon->name;
+
+        File::delete(storage_path("app/public/jkp/minggu-ke-$minggu_ke/$rayon/" . $jkp->file));
+
         $jkp->delete();
-        File::delete(storage_path("app/public/jkp/" . $jkp->file));
 
         $this->showForm();
     }
@@ -46,7 +52,13 @@ class Detail extends Component
         $assignment_id = $this->assignment_id;
 
         $assignment = Assignment::find($assignment_id);
-        $jkp = Jkp::where('assignment_id', $assignment_id)->where('user_id', Auth::user()->id)->first();
+        $jkp = Jkp::where('assignment_id', $assignment_id)
+            ->where('user_id', Auth::user()->id)
+            ->with([
+                'user:id,pemilik_id',
+                'user.student:id,rayon_id',
+                'user.student.rayon:id,name'
+            ])->first();
 
         $turned_in = '';
 

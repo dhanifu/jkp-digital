@@ -1,10 +1,10 @@
-<div>
+<div class="row">
     <div class="col-md-12">
         <div class="card shadow">
             <div class="card-header border-0 h-12" style="background: linear-gradient(90deg, rgba(247,247,247,1) 0%, rgba(255,255,255,1) 100%);">
                 <div class="card-title font-weight-bold text-primary"><strong>Ditugaskan</strong>
                     <div class="float-right">
-                        <button wire:click="$refresh" class="btn btn-light btn-circle btn-sm">
+                        <button wire:click="default" class="btn btn-light btn-circle btn-sm">
                             <i class="fas fa-redo-alt"></i>
                         </button>
                     </div>
@@ -54,5 +54,12 @@
             url = url.replace(':id', id)
             document.location.href=url
         }
+
+        
+        window.onscroll = function(ev) {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                window.livewire.emit('load-more');
+            }
+        };
     </script>
 @endpush
