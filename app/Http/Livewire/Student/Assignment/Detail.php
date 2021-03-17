@@ -52,7 +52,13 @@ class Detail extends Component
         $assignment_id = $this->assignment_id;
 
         $assignment = Assignment::find($assignment_id);
-        $jkp = Jkp::where('assignment_id', $assignment_id)->where('user_id', Auth::user()->id)->first();
+        $jkp = Jkp::where('assignment_id', $assignment_id)
+            ->where('user_id', Auth::user()->id)
+            ->with([
+                'user:id,pemilik_id',
+                'user.student:id,rayon_id',
+                'user.student.rayon:id,name'
+            ])->first();
 
         $turned_in = '';
 
