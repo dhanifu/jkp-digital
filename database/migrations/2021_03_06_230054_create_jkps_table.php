@@ -20,9 +20,7 @@ class CreateJkpsTable extends Migration
             $table->text('file');
             $table->uuid('created_by');
             $table->uuid('updated_by')->nullable();
-            $table->uuid('deleted_by')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

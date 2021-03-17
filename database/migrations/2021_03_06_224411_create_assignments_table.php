@@ -16,8 +16,8 @@ class CreateAssignmentsTable extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('minggu_ke');
-            $table->date('from_date');
-            $table->date('to_date');
+            $table->dateTime('from_date');
+            $table->dateTime('to_date');
             $table->timestamps();
         });
     }

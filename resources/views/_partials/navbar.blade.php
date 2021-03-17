@@ -7,13 +7,7 @@
         </span>
         <div class="right-info">
             <div class="flex items-center">
-                <p class="text-sm mr-2 text-white">@role('admin')
-                    {{ Auth::user()->admin->name }}
-                    @elserole('pembimbing')
-                    {{ Auth::user()->pembimbing->name }}
-                    @elserole('student')
-                    {{ Auth::user()->student->name }}
-                    @endrole</p>
+                <p class="text-sm mr-2 text-white">{{ getName() }}</p>
                 <div>
                     <a href="{{ route('logout') }}" class="icon-nav hover:no-underline"
                     onclick="event.preventDefault();
