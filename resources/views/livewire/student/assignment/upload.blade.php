@@ -9,8 +9,12 @@
             </div>
         </div>
 
-        <div class="px-4 pb-4 ">
-            <button class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
-        </div>
+        @if($file)
+            <div class="px-4 pb-4 ">
+                <button class="btn btn-primary px-4 py-2 shadow">
+                    Submit
+                </button>
+            </div>
+        @endif
     </form>
 </div>
