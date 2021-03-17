@@ -285,4 +285,42 @@ h4{
 }
 
 /*  TABLE --------------------------------------------------------------------------------------*/
+.content-table {
+    position: relative;
+    width: 100%;
+    left: 0;
+    top: 30px;
+    padding: 0 20px;
+    /* padding-bottom: 10px; */
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-transition: all 0.5s;
+    margin-bottom: 10px;
+   
+}
+.content-tb2{
+    padding: 10px 0;
+}
+.content-table .header-content-table h4{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height:40px;
+    font-size: 18px;
+
+}
+.content-table .header-content-table .tombol-card.card-minus{
+    display: none;
+}
+.content-table .header-content-table .tombol-card{
+    display: block;
+    cursor: pointer;
+    /* background-color: #303f9f; */
+    margin-bottom: 20px;
+    text-align: right;
+    border-bottom: 1px solid #cccace;
+    padding: 12px 10px;
+}
 

@@ -170,7 +170,7 @@ body{
     color: white;
    
 }
-.right-info a{
+.right-info span{
     color: white;
 }
 .top-navbar .top-menu .icon-nav.menu-icon{
@@ -208,6 +208,58 @@ body{
     right: -20px;
     background: rgb(30,56,132);
     z-index: -10;
+}
+
+.top-navbar .top-menu .right-info .icon-nav .icon-dropdown{
+    position: absolute;
+    bottom: -0px;
+    right: -13px;
+    font-size: 10px;
+}
+.top-navbar .top-menu .right-info .icon-nav.top {
+    display: none;
+}
+
+.top-navbar .top-menu .right-info .dropdwon{
+    position: absolute;
+    background: white;
+    padding: 10px;
+    right: 0;
+    border-radius: 5px;
+    display: none;
+    opacity: 0;
+    width: 180px;
+    margin-top: 10px;
+    -webkit-transition: all 5s;
+}
+.top-navbar .top-menu .right-info .dropdwon .header-dropdown{
+    margin: 15px 10px;
+}
+.top-navbar .top-menu .right-info .dropdwon .header-dropdown h4{
+    font-size: 15px;
+}
+.top-navbar .top-menu .right-info .dropdwon .header-dropdown span{
+    font-size: 10px;
+}
+.top-navbar .top-menu .right-info .dropdwon a{
+    font-size: 14px;
+    margin: 5px 5px;
+    display: flex;
+    color: rgb(30,56,132);
+}
+.top-navbar .top-menu .right-info .dropdwon a i{
+    margin-right: 5px;
+}
+.top-navbar .top-menu .right-info .dropdwon::after{
+    content: "";
+    position: absolute;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid white;
+    display: flex;
+    justify-content: flex-end;
+    right: 10px;
+    top: -8px;
 }
 
 /* table */
