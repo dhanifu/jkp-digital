@@ -23,8 +23,14 @@ class Detail extends Component
 
     public function delete(Jkp $jkp)
     {
+        $jkp = $jkp->with(['assignment:id,minggu_ke', 'user.student.rayon:id,name'])->first();
+
+        $minggu_ke = $jkp->assignment->minggu_ke;
+        $rayon = $jkp->user->student->rayon->name;
+
+        File::delete(storage_path("app/public/jkp/minggu-ke-$minggu_ke/$rayon/" . $jkp->file));
+
         $jkp->delete();
-        File::delete(storage_path("app/public/jkp/" . $jkp->file));
 
         $this->showForm();
     }
