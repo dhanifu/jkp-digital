@@ -20,6 +20,19 @@ class Create extends Component
 
     public function store()
     {
+        /**
+         *  ini kode testing biar cepet gausah input
+         *  kalo mau pake, komen dulu $rules nya
+         *  dan komen semua yang ada dibawah 2 variable ini
+         *  kecuali yang assignment::create()
+         */
+        // $assignment_terbaru = Assignment::latest()->first();
+        // $data = [
+        //     'minggu_ke' => $assignment_terbaru->minggu_ke + 1,
+        //     'from_date' => tambahTujuhHari($assignment_terbaru->from_date),
+        //     'to_date' => tambahTujuhHari($assignment_terbaru->to_date),
+        // ];
+
         $data = $this->validate();
         $data["from_date"] = date('Y-m-d H:i:00', strtotime($data["from_date"]));
         $data["to_date"] = date('Y-m-d H:i:59', strtotime($data["to_date"]));

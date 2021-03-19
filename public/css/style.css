@@ -183,6 +183,9 @@ body{
     position: absolute;
     opacity: 0;
 }
+.click {
+    cursor: pointer;
+}
 
 /* main container */
 .main-container{
