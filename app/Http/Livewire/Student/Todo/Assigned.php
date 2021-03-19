@@ -3,16 +3,42 @@
 namespace App\Http\Livewire\Student\Todo;
 
 use App\Models\Assignment;
+use App\Models\Jkp;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Assigned extends Component
 {
-    protected $listeners = ['refreshAssigned' => '$refresh'];
+    public $perPage = 8;
+
+    protected $listeners = [
+        'refreshAssigned' => '$refresh',
+        'load-more' => 'loadMore'
+    ];
+
+    public function loadMore()
+    {
+        $this->perPage += 8;
+    }
 
     public function render()
     {
-        $assignments = Assignment::select(['id', 'minggu_ke', 'from_date', 'to_date', 'created_at'])
-            ->latest()->get();
+        $user_id = Auth::user()->id;
+        $data = Assignment::doesntHave('jkps', 'or', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest()->get();
+
+        $assignments = [];
+        $current_date = strtotime(date('Y-m-d H:i:s'));
+
+        foreach ($data as $key => $value) {
+            $due_date = strtotime($value->to_date);
+
+            if ($current_date < $due_date) {
+                $assignments[$key] = $value;
+            }
+        }
+
         return view('livewire.student.todo.assigned', compact('assignments'));
     }
 }

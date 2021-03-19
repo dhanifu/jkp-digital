@@ -53,5 +53,11 @@
             url = url.replace(':id', id)
             document.location.href=url
         }
+
+        window.onscroll = function(ev) {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                window.livewire.emit('load-more');
+            }
+        };
     </script>
 @endpush
