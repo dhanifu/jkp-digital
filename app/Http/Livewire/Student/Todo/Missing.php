@@ -8,12 +8,24 @@ use Livewire\Component;
 
 class Missing extends Component
 {
+    public $perPage = 6;
+
+    protected $listeners = [
+        'refreshMissing' => '$refresh',
+        'load-more' => 'loadMore'
+    ];
+
+    public function loadMore()
+    {
+        $this->perPage += 8;
+    }
+
     public function render()
     {
         $user_id = Auth::user()->id;
         $data = Assignment::doesntHave('jkps', 'or', function ($q) use ($user_id) {
             $q->where('user_id', $user_id);
-        })->latest()->get();
+        })->latest()->paginate($this->perPage);
 
         $missing = [];
         $current_date = strtotime(date('Y-m-d H:i:s'));
