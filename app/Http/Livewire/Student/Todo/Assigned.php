@@ -23,8 +23,22 @@ class Assigned extends Component
 
     public function render()
     {
-        $assignments = Assignment::select(['id', 'minggu_ke', 'from_date', 'to_date', 'created_at'])
-            ->latest()->paginate($this->perPage);
+        $user_id = Auth::user()->id;
+        $data = Assignment::doesntHave('jkps', 'or', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest()->get();
+
+        $assignments = [];
+        $current_date = strtotime(date('Y-m-d H:i:s'));
+
+        foreach ($data as $key => $value) {
+            $due_date = strtotime($value->to_date);
+
+            if ($current_date < $due_date) {
+                $assignments[$key] = $value;
+            }
+        }
+
         return view('livewire.student.todo.assigned', compact('assignments'));
     }
 }
