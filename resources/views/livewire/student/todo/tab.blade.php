@@ -16,7 +16,9 @@
                 <livewire:student.todo.assigned />
             </div>
             <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">...</div>
-            <div class="tab-pane fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">...</div>
+            <div class="tab-pane fade tab-pane px-3 py-4 fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">
+                <livewire:student.todo.missing />
+            </div>
         </div>
     </div>
 </div>
