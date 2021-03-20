@@ -5,7 +5,7 @@
         <span class="dash">
             <span class="title">@yield('title')</span>
         </span>
-        <div class="right-info cursor-pointer">
+        <div class="right-info">
             <span class="icon-nav top click">
                 <i class="fas fa-user"></i>
             </span>
@@ -16,7 +16,7 @@
                 <div class="header-dropdown">
                     <h4 class="font-semibold border-b border-gray-200 pb-3">{{ getName() }}</h4>
                 </div>
-                <a href="{{ route('logout') }}" class="flex items-center py-2 font-semibold hover:no-underline hover:bg-gray-200"
+                <a href="{{ route('logout') }}" class="flex items-center py-2 font-semibold hover:no-underline"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"
                 ><i class="fas fa-power-off"></i>Logout</a>
