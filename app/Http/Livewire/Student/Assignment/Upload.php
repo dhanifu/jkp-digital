@@ -26,7 +26,7 @@ class Upload extends Component
         $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
         $extension = $data['file']->getClientOriginalExtension();
 
-        $filename = $filename . '.' . $extension;
+        $filename = $filename . '_' . time() . '.' . $extension;
 
         $jkp = Jkp::create([
             'assignment_id' => $this->assignment_id,
