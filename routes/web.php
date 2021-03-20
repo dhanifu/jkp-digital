@@ -20,19 +20,14 @@ Auth::routes([
 ]);
 
 Route::get('/', function () {
-    if (Auth::check()) {
-        if (Auth::user()->hasRole('admin')) {
-            return redirect()->route('admin.home');
-        } else {
-            return redirect()->route('home');
-        }
+    if (Auth::user()->hasRole('admin')) {
+        return redirect()->route('admin.home');
+    } else {
+        return redirect()->route('home');
     }
-
-    return redirect()->route('login');
-});
+})->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 // Admin
 Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(function () {
@@ -55,7 +50,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(
     Route::view('assignment', 'admin.assignment.index')->name('assignment');
 });
 
-Route::name('student.')->middleware('role:student')->group(function () {
+Route::name('student.')->middleware('auth', 'role:student')->group(function () {
     Route::view('to-do', 'student.todo.index')->name('to-do.index');
     Route::view('assignments', 'student.assignment.index')->name('assignment.index');
     Route::view('assignments/{id}/details', 'student.assignment.detail')->name('assignments.detail');
