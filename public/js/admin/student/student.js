@@ -37,8 +37,8 @@ jQuery(function ($) {
             </div>
         `)
 
-        modal.modal('hide')
         reload()
+        modal.modal('hide')
     }
 
     const error = msg => {
@@ -52,6 +52,7 @@ jQuery(function ($) {
             </div>
         `)
 
+        reload()
         modal.modal('hide')
     }
 

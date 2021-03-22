@@ -1,5 +1,5 @@
 @extends('_layouts.app')
-@section('title' , 'Pembimbing')
+@section('title' , 'Guru')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -23,7 +23,7 @@
                         <h2 class="card-title h6 font-weight-bold text-primary m-0">Data Pemimbing</h2>
                         <div class="float-right">
                             <a href="javascript:void(0)" id="reloadTable" class="btn btn-success btn-sm">Reload</a>
-                            <a href="{{ route('admin.pembimbing.create') }}" class="btn btn-primary btn-sm">Add</a>
+                            <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary btn-sm">Add</a>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalExcel">
                                 Upload Excel
                             </button>
@@ -37,6 +37,7 @@
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -61,10 +62,31 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.pembimbing.import') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.teacher.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <input type="file" name="excel_file" class="form-control">
+                        <div class="form-group">
+                            <label for="excel_file" class="text-dark">Upload Excel file</label>
+                            <input type="file" name="excel_file" id="excel_file" class="form-control @error('excel_file') is-invalid @enderror">
+                            @error('excel_file')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="role" class="text-dark">Role</label>
+                            <select name="role" class="form-control @error('role') is-invalid @enderror">
+                                <option value="">-- Role --</option>
+                                <option value="pembimbing" {{ old('role') == "pembimbing" ? 'selected' : '' }}>
+                                    Pembimbing
+                                </option>
+                                <option value="kesiswaan" {{ old('role') == 'kesiswaan' ? 'selected' : '' }}>
+                                    Kesiswaan
+                                </option>
+                            </select>
+                            @error('role')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -85,11 +107,11 @@
     <script src="{{ asset('libraries/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
     <script>
-        const ajaxUrl = '{{ route('admin.pembimbing.datatables') }}'
-        const editUrl = '{{ route('admin.pembimbing.edit', ':id') }}'
-        const deleteUrl = '{{ route('admin.pembimbing.destroy', ':id') }}'
+        const ajaxUrl = '{{ route('admin.teacher.datatables') }}'
+        const editUrl = '{{ route('admin.teacher.edit', ':id') }}'
+        const deleteUrl = '{{ route('admin.teacher.destroy', ':id') }}'
         const csrf = '{{ csrf_token() }}'
         const reloadTable = document.getElementById('reloadTable')
     </script>
-    <script src="{{ asset('js/admin/pembimbing/pembimbing.js') }}"></script>
+    <script src="{{ asset('js/admin/teacher/teacher.js') }}"></script>
 @endpush

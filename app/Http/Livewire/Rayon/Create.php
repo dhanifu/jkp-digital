@@ -2,34 +2,38 @@
 
 namespace App\Http\Livewire\Rayon;
 
-use App\Models\Pembimbing;
+use App\Models\Teacher;
 use App\Models\Rayon;
 
 use Livewire\Component;
 
 class Create extends Component
 {
-    public $name, $pembimbing_id;
+    public $name, $teacher_id;
 
     protected $rules = [
         'name' => 'required|string|unique:rayons',
-        'pembimbing_id' => 'required'
+        'teacher_id' => 'required'
     ];
 
     public function store(Rayon $rayon)
     {
         $data = $this->validate();
-        
+
         $rayon->create($data);
 
         $this->emit('refresh', 'Sukses Menambah Rayon');
-        $this->reset('name', 'pembimbing_id');
+        $this->reset('name', 'teacher_id');
     }
 
 
-    public function render(Pembimbing $pembimbing)
+    public function render(Teacher $teacher)
     {
-        $pembimbings = $pembimbing->all();
-        return view('livewire.rayon.create', compact('pembimbings'));
+        $roles = \Spatie\Permission\Models\Role::all();
+        $users = \App\Models\User::with('roles', 'teacher')->get();
+        $teachers = $users->reject(function ($user, $key) {
+            return $user->hasRole(['kesiswaan', 'admin']);
+        });
+        return view('livewire.rayon.create', compact('teachers'));
     }
 }

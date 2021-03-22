@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Imports\Admin\PembimbingImport;
+use App\Imports\Admin\TeacherImport;
 use Yajra\Datatables\DataTables;
 
 use Illuminate\Http\Request;
@@ -14,41 +14,36 @@ use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\File;
 
-use App\Models\Pembimbing;
+use App\Models\Teacher;
 use App\Models\Rayon;
 use App\Models\User;
 
-class PembimbingController extends Controller
+class TeacherController extends Controller
 {
+    public $model;
+
     public function __construct()
     {
-        $this->middleware('role:admin');
+        $this->middleware(['auth', 'role:admin']);
+        $this->model = new Teacher;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(): View
     {
-        return view('admin.pembimbing.index');
+        return view('admin.teacher.index');
     }
 
-    /**
-     * Get pembimbing data with DataTables
-     * 
-     * @return Object
-     */
     public function datatables(): Object
     {
-        $pembimbings = Pembimbing::select(['id', 'user_id', 'nip', 'name', 'agama', 'gender', 'photo'])
-            ->with('akun')->latest()->get();
+        $teachers = $this->model->select(['id', 'user_id', 'nip', 'name', 'agama', 'gender', 'photo'])
+            ->with('akun.roles')->latest()->get();
 
-        $datatables = DataTables::of($pembimbings)
+        $datatables = DataTables::of($teachers)
             ->addIndexColumn()
-            ->editColumn('email', function ($pembimbing) {
-                return $pembimbing->akun->email;
+            ->editColumn('email', function ($teacher) {
+                return $teacher->akun->email;
+            })->editColumn('role', function ($teacher) {
+                return $teacher->akun->roles[0]->name;
             })->addColumn('action', '
                 <div class="btn-group" role="group" aria-label="Action">
                     <button class="btn btn-sm btn-success" data-action="edit">
@@ -65,18 +60,12 @@ class PembimbingController extends Controller
 
     public function create()
     {
-        return view('admin.pembimbing.create');
+        return view('admin.teacher.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\Pembimbing\CreatePembimbingRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function cekNip(Request $request)
     {
-        $cek = Pembimbing::select(['id', 'nip'])->where('nip', $request->nip)->count();
+        $cek = $this->model->select(['id', 'nip'])->where('nip', $request->nip)->count();
 
         $response = '<span class="text-success">Available.</span>';
 
@@ -87,19 +76,21 @@ class PembimbingController extends Controller
 
         return response()->json(['valid' => $response]);
     }
+
     public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|string|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'nip' => 'required|string|min:12|max:18|unique:pembimbings',
+            'nip' => 'required|string|min:12|max:18|unique:teachers',
             'agama' => 'required|in:Islam,Kristen,Budha,Hindu',
             'gender' => 'required|in:L,P',
-            'photo' => 'image'
+            'photo' => 'image',
+            'role' => 'required|string'
         ]);
 
-        $data_pembimbing = collect($request->except(['photo', 'email', 'password', '_token', 'password_confirmation']));
+        $data_teacher = collect($request->except(['photo', 'email', 'password', '_token', 'password_confirmation']));
         $data_user = collect($request->except(['name', 'nip', 'agama', 'gender', 'photo', 'password_confirmation', '_token']));
 
         // try {
@@ -108,36 +99,43 @@ class PembimbingController extends Controller
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $fileName = $fileName . '_' . time() . '.' . $file->extension();
 
-            $file->storeAs('public/photos/pembimbing', $fileName);
+            $file->storeAs('public/photos/teacher', $fileName);
 
             $photo = $fileName;
 
-            $data_pembimbing = $data_pembimbing->merge([
+            $data_teacher = $data_teacher->merge([
                 'photo' => $photo
             ]);
         }
 
         $user = User::create($data_user->all());
-        $user->assignRole('pembimbing');
+        $user->assignRole($data_teacher['role']);
 
-        $data_pembimbing = $data_pembimbing->merge([
+        $data_teacher = $data_teacher->merge([
             'user_id' => $user->id
         ]);
-        $pembimbing = Pembimbing::create($data_pembimbing->all());
 
-        $user->update(['pemilik_id' => $pembimbing->id]);
+        $teacher = $this->model->create($data_teacher->all());
+
+        $user->update(['pemilik_id' => $teacher->id]);
         // } catch (\Exception $ex) {
         //     return back()->with('error', 'Something Wrong, please reinput form');
         // }
 
-        return redirect()->route('admin.pembimbing.index')->with('success', 'Berhasil menambah Pembimbing');
+        return redirect()->route('admin.teacher.index')->with('success', 'Berhasil menambah Guru');
     }
 
     // Import From Excel
     public function import(): RedirectResponse
     {
+        $this->validate(request(), [
+            'excel_file' => 'required',
+            'role' => 'required'
+        ]);
+
         try {
-            Excel::import(new PembimbingImport, request()->file('excel_file'));
+            $role = request()->role;
+            Excel::import(new TeacherImport($role), request()->file('excel_file'));
         } catch (\Exception $ex) {
             return back()->with(['error' => "Something went wrong. Check your file"]);
         } catch (\Error $er) {
@@ -147,64 +145,48 @@ class PembimbingController extends Controller
         return back()->with(['success' => "Berhasil diimport"]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pembimbing  $pembimbing
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pembimbing $pembimbing)
+    public function show(Teacher $teacher)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pembimbing  $pembimbing
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pembimbing $pembimbing)
+    public function edit(Teacher $teacher)
     {
-        $pembimbing2 = Rayon::select(['id', 'pembimbing_id', 'name'])
-            ->with('pembimbing')->where('pembimbing_id', $pembimbing->id)->get();
+        $teacher2 = Rayon::select(['id', 'teacher_id', 'name'])
+            ->with('teacher')->where('teacher_id', $teacher->id)->get();
         $rayon = [];
-        foreach ($pembimbing2 as $key => $value) {
+        foreach ($teacher2 as $key => $value) {
             $rayon[$key] = $value->name;
         }
         // dd($rayon);
-        return view('admin.pembimbing.edit', compact('pembimbing', 'rayon'));
+        return view('admin.teacher.edit', compact('teacher', 'rayon'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\Pembimbing\UpdatePembimbingRequest  $request
-     * @param  \App\Models\Pembimbing  $pembimbing
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pembimbing $pembimbing)
+    public function update(Request $request, Teacher $teacher)
     {
         $this->validate($request, [
             'name' => 'required|string',
             'agama' => 'required|in:Islam,Kristen,Budha,Hindu',
             'gender' => 'required|in:L,P',
-            'photo' => 'image'
+            'photo' => 'image',
+            'role' => 'required'
         ]);
 
         try {
             if (request()->delete_photo) {
-                File::delete(storage_path("app/public/photos/pembimbing/" . $pembimbing->photo));
+                File::delete(storage_path("app/public/photos/teacher/" . $teacher->photo));
             }
-            $data = collect($request->except('photo', 'delete_photo'));
+
+            $data = collect($request->except('role', 'photo', 'delete_photo'));
+
             if ($request->hasFile('photo')) {
                 $file = $request->photo;
                 $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $fileName = $fileName . '_' . time() . '.' . $file->extension();
 
-                $file->storeAs('public/photos/pembimbing', $fileName);
+                $file->storeAs('public/photos/teacher', $fileName);
 
-                File::delete(storage_path("app/public/photos/pembimbing/" . $pembimbing->photo));
+                File::delete(storage_path("app/public/photos/teacher/" . $teacher->photo));
 
                 $photo = $fileName;
 
@@ -213,25 +195,21 @@ class PembimbingController extends Controller
                 ]);
             }
 
-            $pembimbing->update($data->all());
+            $teacher->update($data->all());
+            $user = User::where('pemilik_id', $teacher->id)->first();
+            $user->syncRoles($request->role);
         } catch (\Exception $e) {
             return back()->with("error", "Something went wrong");
         }
 
-        return redirect()->route('admin.pembimbing.index')->with('success', 'Berhasil mengedit pembimbing');
+        return redirect()->route('admin.teacher.index')->with('success', 'Berhasil mengedit guru');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pembimbing  $pembimbing
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pembimbing $pembimbing): JsonResponse
+    public function destroy(Teacher $teacher): JsonResponse
     {
         try {
-            User::where('pemilik_id', $pembimbing->id)->delete();
-            $pembimbing->delete();
+            User::where('pemilik_id', $teacher->id)->delete();
+            $teacher->delete();
         } catch (\Exception $e) {
             return response()->json(['error' => "Something went wront"]);
         }

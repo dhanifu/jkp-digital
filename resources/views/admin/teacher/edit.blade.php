@@ -1,5 +1,5 @@
 @extends('_layouts.app')
-@section('title' , 'Pembimbing')
+@section('title' , 'Guru')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -15,22 +15,16 @@
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <h2 class="card-title h6 font-weight-bold text-primary m-0">
-                            Edit Pembimbing rayon dari
-                            @for($i=0;$i<count($rayon);$i++)
-                            <span class="text-danger">{{ $rayon[$i] }}</span>
-                                @if((count($rayon)-2) == $i)
-                                    dan
-                                @endif
-                            @endfor
+                            Edit Guru
                         </h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.pembimbing.update', $pembimbing->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.teacher.update', $teacher->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama <span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $pembimbing->name }}">
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $teacher->name }}">
                                 @error('name')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -43,7 +37,7 @@
                                         $agama = ["Islam", "Kristen", "Hindu", "Budha"];
                                     @endphp
                                     @for($i = 0; $i < count($agama); $i++)
-                                        <option value="{{ $agama[$i] }}" {{ $agama[$i] == $pembimbing->agama ? 'selected' : '' }}>
+                                        <option value="{{ $agama[$i] }}" {{ $agama[$i] == $teacher->agama ? 'selected' : '' }}>
                                             {{ $agama[$i] }}
                                         </option>
                                     @endfor
@@ -56,12 +50,20 @@
                                 <label for="gender" class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
                                 <select name="gender" id="gender" class="form-control @error('gender') is-invalid @enderror">
                                     <option>-- Jenis Kelamin --</option>
-                                    <option value="L" {{$pembimbing->gender == "L" ? "selected" : ""}}>Laki-Laki</option>
-                                    <option value="P" {{$pembimbing->gender == "P" ? "selected" : ""}}>Perempuan</option>
+                                    <option value="L" {{$teacher->gender == "L" ? "selected" : ""}}>Laki-Laki</option>
+                                    <option value="P" {{$teacher->gender == "P" ? "selected" : ""}}>Perempuan</option>
                                 </select>
                                 @error('gender')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="">-- Role --</option>
+                                    <option value="kesiswaan">Kesiswaan</option>
+                                    <option value="pembimbing">Pembimbing</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="photo" class="form-label">Photo</label>

@@ -11,7 +11,7 @@ class Rayon extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'pembimbing_id'
+        'name', 'teacher_id'
     ];
 
     protected static function boot()
@@ -31,12 +31,13 @@ class Rayon extends Model
         return 'string';
     }
 
-    public function pembimbing()
+    public function teacher()
     {
-        return $this->belongsTo(Pembimbing::class);
+        return $this->belongsTo(Teacher::class);
     }
 
-    public function student(){
+    public function student()
+    {
         return $this->hasOne(Student::class);
     }
 }

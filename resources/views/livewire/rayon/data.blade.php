@@ -30,7 +30,7 @@
 								<tr>
 									<td>{{ $loop->iteration }}</td>
 									<td>{{ $rayon->name }}</td>
-									<td>{{ $rayon->pembimbing->name }}</td>
+									<td>{{ $rayon->teacher->name }}</td>
 									<td>
 										<button class="btn btn-success btn-sm" wire:click="$emit('edit', '{{ $rayon->id }}')"><i class="fa fa-edit"></i></button>
 										<button class="btn btn-danger btn-sm" onclick="remove()" wire:click="$emit('delete', '{{ $rayon->id }}')"><i class="fa fa-trash"></i></button>

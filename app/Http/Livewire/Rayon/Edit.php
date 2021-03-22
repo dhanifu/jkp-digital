@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Rayon;
 
-use App\Models\Pembimbing;
+use App\Models\Teacher;
 use App\Models\Rayon;
 use Livewire\Component;
 
@@ -15,7 +15,7 @@ class Edit extends Component
 
     protected $rules = [
         'rayon.name' => 'required',
-        'rayon.pembimbing_id' => 'required'
+        'rayon.teacher_id' => 'required'
     ];
 
     public function edit(Rayon $rayon)
@@ -29,7 +29,7 @@ class Edit extends Component
     {
         $this->validate(array_merge($this->rules, [
             'rayon.name' => 'required|string|unique:rayons,name,' . $this->rayon->id,
-            'rayon.pembimbing_id' => 'required|exists:pembimbings,id'
+            'rayon.teacher_id' => 'required|exists:teachers,id'
         ]));
 
         $this->rayon->save();
@@ -38,9 +38,13 @@ class Edit extends Component
         $this->emit('refresh', 'Sukses Mengedit Rayon');
     }
 
-    public function render(Pembimbing $pembimbing)
+    public function render(Teacher $teacher)
     {
-        $pembimbings = $pembimbing->all();
+        $roles = \Spatie\Permission\Models\Role::all();
+        $users = \App\Models\User::with('roles', 'teacher')->get();
+        $pembimbings = $users->reject(function ($user, $key) {
+            return $user->hasRole(['kesiswaan', 'admin']);
+        });
 
         return view('livewire.rayon.edit', compact('pembimbings'));
     }
