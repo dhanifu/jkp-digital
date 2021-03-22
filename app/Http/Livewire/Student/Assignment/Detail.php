@@ -28,7 +28,18 @@ class Detail extends Component
         $minggu_ke = $jkp->assignment->minggu_ke;
         $rayon = Auth::user()->student->rayon->name;
 
-        File::delete(storage_path("app/public/jkp/minggu-ke-$minggu_ke/$rayon/" . $jkp->file));
+        $files = [
+            'file_keagamaan', 'file_literasi',
+            'file_lingkungan', 'file_kesehatan',
+        ];
+
+        if (Auth::user()->student->kelas == '10') {
+            $files[4] = 'file_pramuka';
+        }
+
+        for ($i = 0; $i < count($files); $i++) {
+            File::delete(storage_path("app/public/jkp/minggu-ke-$minggu_ke/$rayon/$files[$i]/" . $jkp[$files[$i]]));
+        }
 
         $jkp->delete();
 

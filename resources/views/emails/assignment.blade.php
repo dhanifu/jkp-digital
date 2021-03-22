@@ -8,5 +8,6 @@
 </head>
 <body>
     <p>tanggal : {{ tanggalBulan($assignment->from_date) }} sampai {{ tanggalBulan($assignment->to_date) }}</p>
+    <a href="{{ route('student.assignments.detail', $assignment->id) }}">Lihat Assignment</a>
 </body>
 </html>

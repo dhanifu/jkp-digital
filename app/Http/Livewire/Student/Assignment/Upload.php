@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Student\Assignment;
 
 use App\Models\Assignment;
 use App\Models\Jkp;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -12,26 +14,43 @@ class Upload extends Component
     use WithFileUploads;
 
     public $assignment_id;
-    public $file;
-
-    protected $rules = [
-        'file' => 'required|mimes:png,jpg,jpeg,pdf',
-    ];
+    public $file_keagamaan;
+    public $file_literasi;
+    public $file_lingkungan;
+    public $file_kesehatan;
+    public $file_pramuka;
 
     public function upload()
     {
-        $data = $this->validate();
+        $validasi = [
+            'file_keagamaan' => 'required|mimes:png,jpg,jpeg,pdf',
+            'file_literasi' => 'required|mimes:png,jpg,jpeg,pdf',
+            'file_lingkungan' => 'required|mimes:png,jpg,jpeg,pdf',
+            'file_kesehatan' => 'required|mimes:png,jpg,jpeg,pdf',
+        ];
 
-        $filenameWithExt = $data['file']->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $data['file']->getClientOriginalExtension();
+        if (Auth::user()->student->kelas == '10') {
+            $validasi += array('file_pramuka' => 'required|mimes:png,jpg,jpeg,pdf');
+        }
 
-        $filename = $filename . '_' . time() . '.' . $extension;
+        $data = $this->validate($validasi);
 
-        $jkp = Jkp::create([
-            'assignment_id' => $this->assignment_id,
-            'file' => $filename
-        ]);
+        $filenameWithExt = [];
+        $filenames = [];
+        $extensions = [];
+        $insert = ['assignment_id' => $this->assignment_id];
+
+        foreach ($data as $key => $value) {
+            $filenameWithExt[$key] = $data[$key]->getClientOriginalName();
+            $filenames[$key] = pathinfo($filenameWithExt[$key], PATHINFO_FILENAME);
+            $extensions[$key] = $data[$key]->getClientOriginalExtension();
+        }
+
+        foreach ($filenames as $key => $value) {
+            $insert[$key] = Str::slug($value) . '_' . substr(Str::uuid(), 0, 8) . '.' . $extensions[$key];
+        }
+
+        $jkp = Jkp::create($insert);
 
         $assignment = Assignment::find($this->assignment_id);
         $jkp = $jkp->with('user.student.rayon:id,name')->first();
@@ -39,7 +58,9 @@ class Upload extends Component
         $minggu_ke = $assignment->minggu_ke;
         $rayon = $jkp->user->student->rayon->name;
 
-        $this->file->storeAs("public/jkp/minggu-ke-$minggu_ke/$rayon", $filename);
+        foreach ($filenames as $key => $value) {
+            $this->$key->storeAs("public/jkp/minggu-ke-$minggu_ke/$rayon/$key", $insert[$key]);
+        }
 
         $this->emit('hideForm');
     }

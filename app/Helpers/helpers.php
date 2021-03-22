@@ -98,7 +98,7 @@ function dueDate($due_date)
     return $result;
 }
 
-function jkp($minggu_ke, $rayon, $file)
+function jkp($minggu_ke, $rayon, $type, $file)
 {
-    return asset("storage/jkp/minggu-ke-$minggu_ke/$rayon/$file");
+    return asset("storage/jkp/minggu-ke-$minggu_ke/$rayon/$type/$file");
 }
