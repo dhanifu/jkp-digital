@@ -35,11 +35,24 @@
                                     </div>
                                 @endif
 
-                                <a href="{{ jkp($assignment->minggu_ke, $jkp->user->student->rayon->name, $jkp->file) }}" 
-                                    class="text-blue-700" target="_blank">
-                                    {{ $jkp->file }}
-                                </a>
-                                <br><br>
+                                @php
+                                    $types = [
+                                        'file_keagamaan', 'file_literasi',
+                                        'file_lingkungan', 'file_kesehatan'
+                                    ];
+                                @endphp
+                                @if(Auth::user()->student->kelas == '10')
+                                    @php $types[4] = 'file_pramuka'; @endphp
+                                @endif
+                                
+                                @for($i = 0; $i < count($types); $i++)
+                                    <a href="{{ jkp($assignment->minggu_ke, $jkp->user->student->rayon->name, $types[$i],$jkp[$types[$i]]) }}" 
+                                        class="text-blue-700" target="_blank">
+                                        {{ $jkp[$types[$i]] }}
+                                    </a>
+                                    <br>
+                                @endfor
+                                <br>
                                 <button class="btn bg-red-600 text-white rounded" onclick="remove()" wire:click="$emit('delete', '{{ $jkp->id }}')">Unsubmit</button>
                             </div>
                         @endif
