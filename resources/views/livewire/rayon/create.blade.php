@@ -15,14 +15,14 @@
             </div>
             <div class="form-group">
                 <label>Pembimbing</label>
-                <select style="width: 100%" class="form-control  @error('pembimbing_id') is-invalid @enderror" wire:model="pembimbing_id">
+                <select style="width: 100%" class="form-control  @error('teacher_id') is-invalid @enderror" wire:model="teacher_id">
                     <option>-- Select --</option>
-                    @foreach ($pembimbings as $pembimbing)
-                    <option value="{{ $pembimbing->id }}">{{ $pembimbing->name }}</option>
+                    @foreach ($teachers as $teacher)
+                    <option value="{{ $teacher->teacher->id }}">{{ $teacher->teacher->name }}</option>
                     @endforeach
                 </select>
 
-                @error('pembimbing_id')
+                @error('teacher_id')
                 <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>

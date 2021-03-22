@@ -1,5 +1,5 @@
 @extends('_layouts.app')
-@section('title' , 'Pembimbing')
+@section('title' , 'Guru')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -23,7 +23,7 @@
                         <h2 class="card-title h6 font-weight-bold text-primary m-0">Data Pemimbing</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.pembimbing.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.teacher.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
@@ -88,6 +88,17 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
+                                <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
+                                    <option value="">-- Role --</option>
+                                    <option value="kesiswaan" {{"kesiswaan" == old('role') ? "selected" : ""}}>Kesiswaan</option>
+                                    <option value="pembimbing" {{"pembimbing" == old('role') ? "selected" : ""}}>Pembimbing</option>
+                                </select>
+                                @error('role')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
                                 <label for="photo" class="form-label">Photo</label>
                                 <input type="file" name="photo" id="photo" class="form-control @error('photo') is-invalid @enderror" aria-describedby="photoHelp">
                                 <div id="photoHelp" class="form-text">Tidak perlu diisi bila tidak ingin mengganti foto.</div>
@@ -109,7 +120,7 @@
 
                 if (nip != '' && nip.length >= 12) {
                     $.ajax({
-                        url: '{{ route('admin.pembimbing.cek-nip') }}',
+                        url: '{{ route('admin.teacher.cek-nip') }}',
                         type: 'get',
                         data: { nip: nip },
                         success: (data) => {

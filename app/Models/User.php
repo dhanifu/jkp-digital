@@ -70,9 +70,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Admin::class, 'pemilik_id');
     }
-    public function pembimbing()
+    public function teacher()
     {
-        return $this->belongsTo(Pembimbing::class, 'pemilik_id');
+        return $this->belongsTo(Teacher::class, 'pemilik_id');
     }
     public function student()
     {

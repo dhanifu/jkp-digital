@@ -45,9 +45,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.pembimbing.index') }}" class="{{ request()->is('admin/pembimbing')? ' active' : '' }}">
-                        <span class="icon{{ request()->is('admin/pembimbing')? ' active' : '' }}"><i class="fas fa-users" aria-hidden="true"></i></span>
-                        <span class="list">Pembimbing</span>
+                    <a href="{{ route('admin.teacher.index') }}" class="{{ request()->is('admin/teacher/*')? ' active' : '' }}">
+                        <span class="icon{{ request()->is('admin/teacher/*')? ' active' : '' }}"><i class="fas fa-users" aria-hidden="true"></i></span>
+                        <span class="list">Guru</span>
                     </a>
                 </li>
                 <li>

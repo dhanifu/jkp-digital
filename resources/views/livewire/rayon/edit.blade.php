@@ -22,21 +22,21 @@
 
                             <div class="form-group">
                                 <label>Pembimbing</label>
-                                <select wire:model="rayon.pembimbing_id" id="pembimbing_id" class="form-control @error('rayon.pembimbing_id') is-invalid @enderror">
+                                <select wire:model="rayon.teacher_id" id="teacher_id" class="form-control @error('rayon.teacher_id') is-invalid @enderror">
                                     <option>-- Pilih --</option>
                                     @php
                                         $array = [];
                                     @endphp
                                     @foreach($pembimbings as $pembimbing)
                                         @php
-                                            $array[$pembimbing->id] = $pembimbing->id;
+                                            $array[$pembimbing->teacher->id] = $pembimbing->teacher->id;
                                         @endphp
-                                        <option value="{{ $pembimbing->id }}" {{ $pembimbing->id == $array[$pembimbing->id] ? 'selected' : '' }}>
-                                            {{ $pembimbing->name }}
+                                        <option value="{{ $pembimbing->teacher->id }}" {{ $pembimbing->teacher->id == $array[$pembimbing->teacher->id] ? 'selected' : '' }}>
+                                            {{ $pembimbing->teacher->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('rayon.pembimbing_id')
+                                @error('rayon.teacher_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>

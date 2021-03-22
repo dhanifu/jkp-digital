@@ -6,7 +6,7 @@ use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class PembimbingSeeder extends Seeder
+class KesiswaanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,21 +16,21 @@ class PembimbingSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'email' => 'pembimbing@jkp.com',
+            'email' => 'kesiswaan@jkp.com',
             'password' => '12345678',
         ]);
-        $user->assignRole('pembimbing');
+        $user->assignRole('kesiswaan');
 
-        $pembimbing = Teacher::create([
+        $kesiswaan = Teacher::create([
             'user_id' => $user->id,
-            'nip' => 'PRW000000001',
-            'name' => 'Pembimbing WK',
+            'nip' => 'PRW000000002',
+            'name' => 'Kesiswaan WK',
             'agama' => 'Islam',
             'gender' => 'L',
         ]);
 
         $user->update([
-            'pemilik_id' => $pembimbing->id
+            'pemilik_id' => $kesiswaan->id
         ]);
     }
 }

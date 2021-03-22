@@ -2,13 +2,20 @@
 
 namespace App\Imports\Admin;
 
-use App\Models\Pembimbing;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
-class PembimbingImport implements ToCollection
+class TeacherImport implements ToCollection
 {
+    private $role;
+
+    public function __construct($role)
+    {
+        $this->role = $role;
+    }
+
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
@@ -16,9 +23,9 @@ class PembimbingImport implements ToCollection
                 'email' => $row[0],
                 'password' => '12345678',
             ]);
-            $user->assignRole('pembimbing');
+            $user->assignRole($this->role);
 
-            $pembimbing = Pembimbing::create([
+            $teacher = Teacher::create([
                 'user_id' => $user->id,
                 'nip' => $row[1],
                 'name' => $row[2],
@@ -26,7 +33,7 @@ class PembimbingImport implements ToCollection
                 'gender' => $row[4],
             ]);
 
-            $user->update(['pemilik_id' => $pembimbing->id]);
+            $user->update(['pemilik_id' => $teacher->id]);
         }
     }
 }

@@ -34,8 +34,8 @@ function profileImage()
         } else {
             $image = asset("image/default-profile.png");
         }
-    } elseif ($role == 'pembimbing') {
-        $photo = Auth::user()->pembimbing->photo;
+    } elseif ($role == 'pembimbing' || $role == 'kesiswaan') {
+        $photo = Auth::user()->teacher->photo;
         if ($photo != '') {
             $image = asset("storage/photos/$role/$photo");
         } else {
@@ -61,8 +61,8 @@ function getName()
     if ($role == 'admin') {
         $name = Auth::user()->admin->name;
     }
-    if ($role == 'pembimbing') {
-        $name = Auth::user()->pembimbing->name;
+    if ($role == 'pembimbing' || $role == 'kesiswaan') {
+        $name = Auth::user()->teacher->name;
     }
     if ($role == 'student') {
         $name = Auth::user()->student->name;
@@ -73,20 +73,7 @@ function getName()
 
 function getEmail()
 {
-    $role = Auth::user()->roles[0]->name;
-    $email = '';
-
-    if ($role == 'admin') {
-        $email = Auth::user()->email;
-    }
-    if ($role == 'pembimbing') {
-        $email = Auth::user()->email;
-    }
-    if ($role == 'student') {
-        $email = Auth::user()->email;
-    }
-
-    return $email;
+    return Auth::user()->email;
 }
 
 function dueDate($due_date)

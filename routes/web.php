@@ -37,10 +37,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(
     Route::view('rombel', 'admin.rombel.index')->name('rombel');
     Route::view('student', 'admin.student.index')->name('student');
 
-    Route::resource('pembimbing', 'Admin\PembimbingController');
-    Route::get('cek-nip', 'Admin\PembimbingController@cekNip')->name('pembimbing.cek-nip');
-    Route::post('pembimbing/datatables', 'Admin\PembimbingController@datatables')->name('pembimbing.datatables');
-    Route::post('pembimbing/import', 'Admin\PembimbingController@import')->name('pembimbing.import');
+    Route::resource('teacher', 'Admin\TeacherController');
+    Route::get('cek-nip', 'Admin\TeacherController@cekNip')->name('teacher.cek-nip');
+    Route::post('teacher/datatables', 'Admin\TeacherController@datatables')->name('teacher.datatables');
+    Route::post('teacher/import', 'Admin\TeacherController@import')->name('teacher.import');
 
     Route::resource('student', 'Admin\StudentController');
     Route::get('cek-nis', 'Admin\StudentController@cekNis')->name('student.cek-nis');

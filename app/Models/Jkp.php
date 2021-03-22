@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jkp extends Model
 {
@@ -20,10 +19,6 @@ class Jkp extends Model
             $model->created_by = Auth::user()->id;
             $model->user_id = Auth::user()->id;
             $model->{$model->getKeyName()} = Str::uuid()->toString();
-        });
-
-        static::updating(function ($model) {
-            $model->updated_by = Auth::user()->id;
         });
     }
 

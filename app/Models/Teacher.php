@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Pembimbing extends Model
+class Teacher extends Model
 {
     use HasFactory;
 
@@ -28,14 +28,6 @@ class Pembimbing extends Model
     }
 
     protected $guarded = [];
-
-    public function getPhotoSrcAttribute()
-    {
-        if ($this->photo == null) {
-            return "<img src='" . folderStorage("photos/user.jpg") . "'/>";
-        }
-        return "<img src='" . folderStorage("photos/pembimbing/$this->photo") . "'/>";
-    }
 
     public function akun()
     {
