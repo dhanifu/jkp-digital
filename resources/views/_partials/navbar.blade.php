@@ -16,10 +16,11 @@
                 <div class="header-dropdown">
                     <h4 class="font-semibold border-b border-gray-200 pb-3">{{ getName() }}</h4>
                 </div>
-                <a href="{{ route('logout') }}" class="flex items-center py-2 font-semibold hover:no-underline"
-                onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();"
-                ><i class="fas fa-power-off"></i>Logout</a>
+                <a href="#logout" class="flex items-center py-2 font-semibold hover:no-underline"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    <i class="fas fa-power-off"></i> Logout
+                </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
