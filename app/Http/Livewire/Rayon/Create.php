@@ -32,7 +32,7 @@ class Create extends Component
         $roles = \Spatie\Permission\Models\Role::all();
         $users = \App\Models\User::with('roles', 'teacher')->get();
         $teachers = $users->reject(function ($user, $key) {
-            return $user->hasRole(['kesiswaan', 'admin']);
+            return $user->hasRole(['kesiswaan', 'admin', 'student']);
         });
         return view('livewire.rayon.create', compact('teachers'));
     }
