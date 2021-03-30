@@ -55,3 +55,12 @@ Route::name('student.')->middleware('auth', 'role:student')->group(function () {
     Route::view('assignments', 'student.assignment.index')->name('assignment.index');
     Route::view('assignments/{id}/details', 'student.assignment.detail')->name('assignments.detail');
 });
+
+Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(function () {
+    Route::prefix('r')->name('rayon.')->group(function () {
+        Route::view('', 'pembimbing.rayon')->name('index');
+        Route::name('student.')->group(function () {
+            Route::view('/{id}', 'pembimbing.students.index')->name('index');
+        });
+    });
+});
