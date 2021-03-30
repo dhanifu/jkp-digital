@@ -63,6 +63,7 @@
                             <span class="list">Dashboard</span>
                         </a>
                     </li>
+                    @include('pembimbing.sidebar')
 
                 @elserole('student')
                     <li>
