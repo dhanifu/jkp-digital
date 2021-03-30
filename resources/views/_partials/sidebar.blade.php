@@ -39,14 +39,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.student.index') }}" class="{{ request()->is('admin/student')? ' active' : '' }}">
-                        <span class="icon{{ request()->is('admin/student')? ' active' : '' }}"><i class="fas fa-user" aria-hidden="true"></i></span>
+                    <a href="{{ route('admin.student.index') }}" class="{{ request()->routeIs('admin.student.*')? ' active' : '' }}">
+                        <span class="icon{{ request()->routeIs('admin.student.*')? ' active' : '' }}"><i class="fas fa-user" aria-hidden="true"></i></span>
                         <span class="list">Siswa</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.teacher.index') }}" class="{{ request()->is('admin/teacher/*')? ' active' : '' }}">
-                        <span class="icon{{ request()->is('admin/teacher/*')? ' active' : '' }}"><i class="fas fa-users" aria-hidden="true"></i></span>
+                    <a href="{{ route('admin.teacher.index') }}" class="{{ request()->routeIs('admin.teacher.*')? ' active' : '' }}">
+                        <span class="icon{{ request()->routeIs('admin.teacher.*')? ' active' : '' }}"><i class="fas fa-users" aria-hidden="true"></i></span>
                         <span class="list">Guru</span>
                     </a>
                 </li>
@@ -57,7 +57,13 @@
                     </a>
                 </li>
                 @elserole('pembimbing')
-                {{--  --}}
+                    <li>
+                        <a href="{{ route('home') }}" class="{{ request()->is('home')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('home')? ' active' : '' }}"><i class="fas fa-tachometer-alt" aria-hidden="true"></i></span>
+                            <span class="list">Dashboard</span>
+                        </a>
+                    </li>
+                    @include('pembimbing.sidebar')
 
                 @elserole('student')
                     <li>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Rayon;
 use Illuminate\Support\Facades\Auth;
 
 function folderStorage(string $direktori)
@@ -101,4 +102,17 @@ function dueDate($due_date)
 function jkp($minggu_ke, $rayon, $type, $file)
 {
     return asset("storage/jkp/minggu-ke-$minggu_ke/$rayon/$type/$file");
+}
+
+function getRayon()
+{
+    $teacher_id = Auth::user()->teacher->id;
+    $rayon = Rayon::where('teacher_id', $teacher_id)->get();
+
+    return $rayon;
+}
+
+function getRayonById($id)
+{
+    return Rayon::find($id);
 }

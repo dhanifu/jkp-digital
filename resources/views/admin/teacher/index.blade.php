@@ -1,49 +1,47 @@
 @extends('_layouts.app')
 @section('title' , 'Guru')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                @if(session()->has('success'))
-                    <div class="alert alert-success alert-dismissible">
-                        <span>{{ session('success') }}</span>
-                        <button class="close" data-dismiss="alert">&times;</button>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible">
+                    <span>{{ session('success') }}</span>
+                    <button class="close" data-dismiss="alert">&times;</button>
+                </div>
+            @endif
+            @if(session()->has('error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <span>{{ session('error') }}</span>
+                    <button class="close" data-dismiss="alert">&times;</button>
+                </div>
+            @endif
+            <div id="alert"></div>
+            
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h2 class="card-title h6 font-weight-bold text-primary m-0">Data Pemimbing</h2>
+                    <div class="float-right">
+                        <a href="javascript:void(0)" id="reloadTable" class="btn btn-success btn-sm">Reload</a>
+                        <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary btn-sm">Add</a>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalExcel">
+                            Upload Excel
+                        </button>
                     </div>
-                @endif
-                @if(session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible">
-                        <span>{{ session('error') }}</span>
-                        <button class="close" data-dismiss="alert">&times;</button>
-                    </div>
-                @endif
-                <div id="alert"></div>
-                
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <h2 class="card-title h6 font-weight-bold text-primary m-0">Data Pemimbing</h2>
-                        <div class="float-right">
-                            <a href="javascript:void(0)" id="reloadTable" class="btn btn-success btn-sm">Reload</a>
-                            <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary btn-sm">Add</a>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalExcel">
-                                Upload Excel
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
