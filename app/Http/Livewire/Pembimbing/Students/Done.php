@@ -14,6 +14,7 @@ class Done extends Component
 {
     public $minggu_ke;
     public $perPage = 10;
+    public $weeks;
 
     protected $listeners = [
         'refreshDone' => '$refresh',
@@ -27,8 +28,6 @@ class Done extends Component
 
     public function render()
     {
-        $weeks = Assignment::select('id','minggu_ke')->latest()->get();
-
         $minggu_ke = $this->minggu_ke;
 
         $pemray = Auth::user()->teacher;
@@ -45,7 +44,7 @@ class Done extends Component
                 $q->where('minggu_ke', $minggu_ke);
             })->latest()->get();
         } else {
-            $minggu_ke = $weeks[0]->minggu_ke;
+            $minggu_ke = $this->weeks[0]->minggu_ke;
             $jkp_dones = $jkp_dones->whereHas('assignment', function($q) use ($minggu_ke){
                 $q->where('minggu_ke', $minggu_ke);
             })->latest()->get();
@@ -66,6 +65,6 @@ class Done extends Component
 
         $dones = array_filter($done);
 
-        return view('livewire.pembimbing.students.done', compact('weeks', 'dones'));
+        return view('livewire.pembimbing.students.done', compact('dones'));
     }
 }

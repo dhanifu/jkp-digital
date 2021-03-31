@@ -9,6 +9,8 @@ class Tab extends Component
 {
     public function render()
     {
-        return view('livewire.pembimbing.students.tab');
+        $weeks = Assignment::select('id','minggu_ke')->latest()->get();
+
+        return view('livewire.pembimbing.students.tab', compact('weeks'));
     }
 }
