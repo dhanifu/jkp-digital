@@ -37,20 +37,13 @@ class Done extends Component
         $students = Student::where('rayon_id', $rayon->id)
             ->with('akun:id,email,pemilik_id')->get();
 
-        $jkp_dones = Jkp::with('assignment');
-
-        if ($minggu_ke != null) {
-            $jkp_dones = $jkp_dones->whereHas('assignment', function($q) use ($minggu_ke){
-                $q->where('minggu_ke', $minggu_ke);
-            });
-        } else {
+        if ($minggu_ke == null) {
             $minggu_ke = $this->weeks[0]->minggu_ke;
-            $jkp_dones = $jkp_dones->whereHas('assignment', function($q) use ($minggu_ke){
-                $q->where('minggu_ke', $minggu_ke);
-            });
         }
 
-        $jkp_dones = $jkp_dones->latest()->paginate($this->perPage);
+        $jkp_dones = Jkp::with('assignment')->whereHas('assignment', function ($q) use ($minggu_ke) {
+            $q->where('minggu_ke', $minggu_ke);
+        })->latest()->paginate($this->perPage);
 
         $done = [];
         $user_id = [];
