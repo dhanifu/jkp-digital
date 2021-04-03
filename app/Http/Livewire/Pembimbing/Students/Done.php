@@ -42,13 +42,15 @@ class Done extends Component
         if ($minggu_ke != null) {
             $jkp_dones = $jkp_dones->whereHas('assignment', function($q) use ($minggu_ke){
                 $q->where('minggu_ke', $minggu_ke);
-            })->latest()->get();
+            });
         } else {
             $minggu_ke = $this->weeks[0]->minggu_ke;
             $jkp_dones = $jkp_dones->whereHas('assignment', function($q) use ($minggu_ke){
                 $q->where('minggu_ke', $minggu_ke);
-            })->latest()->get();
+            });
         }
+
+        $jkp_dones = $jkp_dones->latest()->paginate($this->perPage);
 
         $done = [];
         $user_id = [];
