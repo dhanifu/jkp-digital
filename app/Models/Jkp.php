@@ -43,4 +43,9 @@ class Jkp extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function assignment_jkp()
+    {
+        return $this->hasMany(AssignmentJkp::class, 'user_id');
+    }
 }

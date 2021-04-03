@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class Assignment extends Model
+class AssignmentJkp extends Model
 {
     use HasFactory;
 
@@ -24,7 +22,6 @@ class Assignment extends Model
     {
         return false;
     }
-
     public function getKeyType()
     {
         return 'string';
@@ -32,18 +29,18 @@ class Assignment extends Model
 
     protected $guarded = [];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function assignment()
+    {
+        return $this->belongsTo(Assignment::class);
+    }
+
     public function jkp()
     {
-        return $this->hasMany('\App\Models\Jkp', 'assignment_id', 'id');
-    }
-
-    public function jkps(): HasMany
-    {
-        return $this->hasMany(Jkp::class, 'assignment_id');
-    }
-
-    public function assignment_jkp()
-    {
-        return $this->hasMany(AssignmentJkp::class, 'user_id');
+        return $this->belongsTo(Jkp::class);
     }
 }
