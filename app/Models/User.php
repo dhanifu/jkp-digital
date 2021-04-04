@@ -78,4 +78,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Student::class, 'pemilik_id');
     }
+
+    public function jkps()
+    {
+        return $this->hasMany(Jkp::class, 'user_id');
+    }
+
+    public function assignment_jkp()
+    {
+        return $this->hasMany(AssignmentJkp::class, 'user_id');
+    }
 }

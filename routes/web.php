@@ -14,18 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+});
 
 Auth::routes([
     'register' => false
 ]);
-
-Route::get('/', function () {
-    if (Auth::user()->hasRole('admin')) {
-        return redirect()->route('admin.home');
-    } else {
-        return redirect()->route('home');
-    }
-})->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

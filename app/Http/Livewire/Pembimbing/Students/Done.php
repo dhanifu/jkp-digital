@@ -14,6 +14,7 @@ class Done extends Component
 {
     public $minggu_ke;
     public $perPage = 10;
+    public $weeks;
 
     protected $listeners = [
         'refreshDone' => '$refresh',
@@ -27,8 +28,6 @@ class Done extends Component
 
     public function render()
     {
-        $weeks = Assignment::select('id','minggu_ke')->latest()->get();
-
         $minggu_ke = $this->minggu_ke;
 
         $pemray = Auth::user()->teacher;
@@ -38,18 +37,13 @@ class Done extends Component
         $students = Student::where('rayon_id', $rayon->id)
             ->with('akun:id,email,pemilik_id')->get();
 
-        $jkp_dones = Jkp::with('assignment');
-
-        if ($minggu_ke != null) {
-            $jkp_dones = $jkp_dones->whereHas('assignment', function($q) use ($minggu_ke){
-                $q->where('minggu_ke', $minggu_ke);
-            })->latest()->get();
-        } else {
-            $minggu_ke = $weeks[0]->minggu_ke;
-            $jkp_dones = $jkp_dones->whereHas('assignment', function($q) use ($minggu_ke){
-                $q->where('minggu_ke', $minggu_ke);
-            })->latest()->get();
+        if ($minggu_ke == null) {
+            $minggu_ke = $this->weeks[0]->minggu_ke;
         }
+
+        $jkp_dones = Jkp::with('assignment')->whereHas('assignment', function ($q) use ($minggu_ke) {
+            $q->where('minggu_ke', $minggu_ke);
+        })->latest()->paginate($this->perPage);
 
         $done = [];
         $user_id = [];
@@ -66,6 +60,6 @@ class Done extends Component
 
         $dones = array_filter($done);
 
-        return view('livewire.pembimbing.students.done', compact('weeks', 'dones'));
+        return view('livewire.pembimbing.students.done', compact('dones'));
     }
 }

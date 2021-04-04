@@ -37,14 +37,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    public function authenticated(Request $request, $user)
-    {
-        if ($user->hasRole('admin')) {
-            return redirect()->route('admin.home');
-        }
-
-        return redirect()->route('home');
+        $this->redirectTo = url()->previous();
     }
 }

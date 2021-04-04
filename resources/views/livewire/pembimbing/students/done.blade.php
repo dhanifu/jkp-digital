@@ -23,8 +23,10 @@
         <table class="table table-striped table-bordered mt-4">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th style="width: 5px">#</th>
                     <th>Nama</th>
+                    <th>NIS</th>
+                    <th>Rombel</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,10 +34,12 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $done->name }}</td>
+                        <td>{{ $done->nis }}</td>
+                        <td>{{ $done->rombel->name }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="2">Kosong</td>
+                        <td colspan="4" align="center">Kosong</td>
                     </tr>
                 @endforelse
             </tbody>
