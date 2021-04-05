@@ -1,14 +1,47 @@
 <div>
     <div class="card shadow">
         <div class="card-header bg-white border-0 shadow-sm">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a wire:click="$emit('refreshDone')" class="nav-link active" id="done-tab" data-toggle="tab" href="#done" role="tab" aria-controls="done" aria-selected="true">Selesai</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a wire:click="$emit('refreshMissing')" class="nav-link" id="missing-tab" data-toggle="tab" href="#missing" role="tab" aria-controls="missing" aria-selected="false">Belum Selesai</a>
-                </li>
-            </ul>
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a wire:click="$emit('refreshDone')" class="nav-link active" id="done-tab" data-toggle="tab" href="#done" role="tab" aria-controls="done" aria-selected="true">Selesai</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a wire:click="$emit('refreshMissing')" class="nav-link" id="missing-tab" data-toggle="tab" href="#missing" role="tab" aria-controls="missing" aria-selected="false">Belum Selesai</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary rounded-0 shadow-sm" id="servicesDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Export
+                            <i class="fas fa-caret-down ml-2"></i>
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-right p-0 pt-2" aria-labelledby="servicesDropdown"
+                            style="width: 200px">
+
+                            <label class="dropdown-header">Minggu Ke</label>
+                            <div class="dropdown-header">
+                                <select name="minggu_ke" id="minggu_ke" class="form-control rounded-0">
+                                    @foreach ($weeks as $w)
+                                        <option value="{{ $w->minggu_ke }}">Minggu ke {{ $w->minggu_ke }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mt-3">
+                                <button type="button" class="dropdown-item border-top py-3" id="download-excel">
+                                    <i class="far fa-file-excel fa-lg mr-2"></i>
+                                    <span class="font-weight-700">Download Excel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="card-body m-0">
@@ -23,3 +56,44 @@
         </div>
     </div>
 </div>
+
+@push('css')
+    <style>
+        @media only screen and (max-width:760px){
+            .dropdown {
+                margin-top: 10px;
+            }
+        }
+    </style>
+@endpush
+
+@push('script')
+    <script>
+        $(".dropdown-menu").click(function (e) {
+            e.stopPropagation()
+        })
+
+        $("#download-excel").click(function(){
+            let query = {
+                minggu_ke: $("#minggu_ke").val()
+            }
+
+            let url = '{{ route('pembimbing.rayon.student.export-excel', ':id') }}'
+            link = url.replace(':id', '{{ request()->id }}') + "?" + $.param(query)
+
+            window.location = link
+            
+            // $.ajax({
+            //     url: link,
+            //     type: 'get',
+            //     responseType: 'blob',
+            //     data: {
+            //         minggu_ke: query.minggu_ke
+            //     }
+            // }).then((response) => {
+            //     const url = window.URL.createObjectURL(new Blob([response.data]))
+            //     const link = document.createElement('a')
+            // })
+        })
+    </script>
+@endpush

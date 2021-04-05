@@ -58,6 +58,7 @@ Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(funct
         Route::view('', 'pembimbing.rayon')->name('index');
         Route::name('student.')->group(function () {
             Route::view('/{id}', 'pembimbing.students.index')->name('index');
+            Route::get('/{id}/export-to-excel', 'Pembimbing\RekapitulasiController@exportExcel')->name('export-excel');
         });
     });
 });
