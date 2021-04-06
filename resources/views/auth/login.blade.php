@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/tailwind.css')}}">
+    <link rel="stylesheet" href="{{ asset('libraries/bootstrap/dist/css/bootstrap.min.css') }}">
     <title>Login</title>
 </head>
     <style>
@@ -25,6 +26,12 @@
                         <h1>JKP Digital</h1>
                     </div>
                     <form action="{{ route('login') }}" method="POST">
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible">
+                                <span>{{ session('error') }}</span>
+                                <button class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        @endif
                         @csrf
                         <div class="mt-2">
                             <label for="" class="block">Email</label>
@@ -49,12 +56,15 @@
                         </label>
     
                         <div>
-                            <button type="submit" class="w-full mt-4 bg-blue-700 md:py-2 py-1 text-white font-bold rounded focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50">Masuk</button>
+                            <button type="submit" class="w-full mt-4 bg-blue-700 md:py-2 py-2 text-white font-bold rounded focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50">Masuk</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('libraries/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('libraries/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
