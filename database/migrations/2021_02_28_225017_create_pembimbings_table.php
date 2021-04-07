@@ -15,7 +15,7 @@ class CreatePembimbingsTable extends Migration
     {
         Schema::create('pembimbings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id'); // Akun
+            $table->uuid('user_id')->nullable(); // Akun
             $table->string('nip')->unique();
             $table->string('name');
             $table->enum('agama', ['Islam', 'Kristen', 'Budha', 'Hindu']);
