@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             // PembimbingSeeder::class,
             // KesiswaanSeeder::class,
-            TeacherSeeder::class
+            TeacherSeeder::class,
+            StudentSeeder::class,
+            RayonSeeder::class,
+            RombelSeeder::class,
         ]);
     }
 }
