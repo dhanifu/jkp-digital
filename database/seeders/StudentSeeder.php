@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Rayon;
+use App\Models\Rombel;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,9 +31,12 @@ class StudentSeeder extends Seeder
                 $u->save();
 
                 $rayon = Rayon::select('id')->get();
+                $rombel = Rombel::select('id')->get();
                 $rayon_id = $rayon[rand(0, count($rayon) - 1)]->id;
+                $rombel_id = $rombel[rand(0, count($rombel) - 1)]->id;
 
                 $student->rayon_id = $rayon_id;
+                $student->rombel_id = $rombel_id;
                 $student->save();
             });
         });
