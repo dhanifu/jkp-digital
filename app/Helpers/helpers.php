@@ -26,32 +26,37 @@ function tambahTujuhHari($date)
 function profileImage()
 {
     $role = Auth::user()->roles[0]->name;
-    $image = '';
+    $image = asset("image/default-profile.png");
 
     if ($role == 'admin') {
         $photo = Auth::user()->admin->photo;
         if ($photo != '') {
             $image = asset("storage/photos/$role/$photo");
-        } else {
-            $image = asset("image/default-profile.png");
         }
     } elseif ($role == 'pembimbing' || $role == 'kesiswaan') {
         $photo = Auth::user()->teacher->photo;
         if ($photo != '') {
             $image = asset("storage/photos/$role/$photo");
-        } else {
-            $image = asset("image/default-profile.png");
         }
     } elseif ($role == 'student') {
         $photo = Auth::user()->student->photo;
         if ($photo != '') {
             $image = asset("storage/photos/$role/$photo");
-        } else {
-            $image = asset("image/default-profile.png");
         }
     }
 
     return $image;
+}
+
+function getFirstName()
+{
+    $fullname = getName();
+    $firstname = strtok($fullname, " ");
+
+    if (strlen($firstname) > 13) {
+        return "<br>$firstname";
+    }
+    return $firstname;
 }
 
 function getName()

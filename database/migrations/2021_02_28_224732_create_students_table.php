@@ -15,7 +15,7 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id'); // Akun
+            $table->uuid('user_id')->nullable(); // Akun
             $table->string('nis', 8)->unique();
             $table->string('name');
             $table->uuid('rayon_id')->nullable();

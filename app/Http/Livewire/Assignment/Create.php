@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Assignment;
 
 use App\Mail\AssignmentMail;
 use App\Models\Assignment;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -42,14 +43,13 @@ class Create extends Component
         $this->reset(['minggu_ke', 'from_date', 'to_date']);
         $this->emit('refresh', 'Sukses Membuat Assignment');
 
-        $users = DB::table('users')
-            ->join('students', 'users.id', '=', 'students.user_id')
-            ->select('users.email')
-            ->get();
+        // $users = User::select('id','email')->whereHas('roles', function ($q) {
+        //     $q->where('name', 'student');
+        // })->get();
 
-        foreach ($users as $user) {
-            Mail::to($user->email)->send(new AssignmentMail($assignment));
-        }
+        // foreach ($users as $user) {
+        //     Mail::to($user->email)->send(new AssignmentMail($assignment));
+        // }
     }
 
     public function render()
