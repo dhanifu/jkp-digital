@@ -38,4 +38,16 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof \Illuminate\Session\TokenMismatchException) {
+            if ($request->getPathInfo() == "/login") {
+                return redirect()->route('login')->with('error', 'Terjadi kesalahan. Coba sekali lagi!');
+            }
+            return redirect()->route('login');
+        }
+
+        return parent::render($request, $e);
+    }
 }
