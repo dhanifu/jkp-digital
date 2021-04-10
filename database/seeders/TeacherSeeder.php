@@ -15,12 +15,18 @@ class TeacherSeeder extends Seeder
      */
     public function run()
     {
-        $jumlah = (int)$this->command->ask('Berapa banyak data user yang akan dibuat?', 10);
-        $roleAsk = (int)$this->command->ask('(ROLE) 1. Pembimbing || 2. Kesiswaan || 1 atau 2 ?', 1);
+        $roleAsk = (int)$this->command->ask("(ROLE)\n 1. Pembimbing\n 2. Kesiswaan\n Default = Pembimbing", 1);
+
         if ($roleAsk == 1) {
             $role = 'pembimbing';
+            $jumlah = 29;
         } elseif ($roleAsk == 2) {
             $role = 'kesiswaan';
+            $jumlah = (int)$this->command->ask("Berapa banyak data kesiswaan yang akan dibuat? default=10", 10);
+        } else {
+            $this->command->info("Memilih selain 1 dan 2 = Memilih Pembimbing.");
+            $role = "pembimbing";
+            $jumlah = 29;
         }
 
         $this->command->info("Membuat {$jumlah} {$role}.");

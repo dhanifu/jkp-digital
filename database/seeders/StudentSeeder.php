@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Rayon;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -15,7 +16,7 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        $jumlah = (int)$this->command->ask('Berapa banyak data user yang akan dibuat?', 10);
+        $jumlah = (int)$this->command->ask('Berapa banyak data siswa yang akan dibuat?', 10);
 
         $this->command->info("Membuat {$jumlah} siswa.");
 
@@ -27,6 +28,12 @@ class StudentSeeder extends Seeder
                 $u = User::find($student->user_id);
                 $u->pemilik_id = $student->id;
                 $u->save();
+
+                $rayon = Rayon::select('id')->get();
+                $rayon_id = $rayon[rand(0, count($rayon) - 1)]->id;
+
+                $student->rayon_id = $rayon_id;
+                $student->save();
             });
         });
 
