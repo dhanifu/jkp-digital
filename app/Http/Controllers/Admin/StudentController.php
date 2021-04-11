@@ -136,7 +136,7 @@ class StudentController extends Controller
         return redirect()->route('admin.student.index')->with('success', 'Berhasil menambah siswa');
     }
 
-    public function import()
+    public function import(): RedirectResponse
     {
         try {
             Excel::import(new StudentImport, request()->file('excel_file'));
@@ -226,7 +226,7 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy(Student $student): JsonResponse
     {
         try {
             User::where('pemilik_id', $student->id)->delete();
