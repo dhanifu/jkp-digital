@@ -88,6 +88,53 @@
                             <span class="list">Assignments</span>
                         </a>
                     </li>
+                @elserole('kesiswaan')
+                    <li>
+                        <a href="{{ route('home') }}" class="{{ request()->is('home')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('home')? ' active' : '' }}"><i class="fas fa-tachometer-alt" aria-hidden="true"></i></span>
+                            <span class="list">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kesiswaan.keagamaan.index') }}" class="{{ request()->is('kesiswaan/keagamaan')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('kesiswaan/keagamaan')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">Keagamaan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kesiswaan.literasi.index') }}" class="{{ request()->is('kesiswaan/literasi')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('kesiswaan/literasi')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">Literasi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kesiswaan.kesehatan.index') }}" class="{{ request()->is('kesiswaan/kesehatan')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('kesiswaan/kesehatan')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">Kesehatan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kesiswaan.lingkungan.index') }}" class="{{ request()->is('kesiswaan/lingkungan')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('kesiswaan/lingkungan')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">Lingkungan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kesiswaan.pramuka.index') }}" class="{{ request()->is('kesiswaan/pramuka')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('kesiswaan/pramuka')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">Pramuka</span>
+                        </a>
+                    </li>
                 @endrole
             </ul>
         </div>
