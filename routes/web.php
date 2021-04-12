@@ -64,18 +64,7 @@ Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(funct
 });
 
 Route::prefix('kesiswaan')->name('kesiswaan.')->middleware(['auth', 'role:kesiswaan'])->group(function (){
-    Route::view('keagamaan', 'kesiswaan.keagamaan.index')->name('keagamaan.index');
-    Route::view('keagamaan/{id}/details', 'kesiswaan.keagamaan.detail')->name('keagamaan.detail');
-
-    Route::view('literasi', 'kesiswaan.literasi.index')->name('literasi.index');
-    Route::view('literasi/{id}/details', 'kesiswaan.literasi.detail')->name('literasi.detail');
-
-    Route::view('kesehatan', 'kesiswaan.kesehatan.index')->name('kesehatan.index');
-    Route::view('kesehatan/{id}/details', 'kesiswaan.kesehatan.detail')->name('kesehatan.detail');
-
-    Route::view('lingkungan', 'kesiswaan.lingkungan.index')->name('lingkungan.index');
-    Route::view('lingkungan/{id}/details', 'kesiswaan.lingkungan.detail')->name('lingkungan.detail');
-
-    Route::view('pramuka', 'kesiswaan.pramuka.index')->name('pramuka.index');
-    Route::view('pramuka/{id}/details', 'kesiswaan.pramuka.detail')->name('pramuka.detail');
+    Route::view('/{jenisJkp}', 'kesiswaan.rayon')->name('rayon');
+    Route::view('/{jenisJkp/{rayon}', 'kesiswaan.student')->name('student');
+    Route::view('/{jenisJkp/{rayon}/{student}/details', 'kesiswaan.student-detail')->name('student-detail');
 });
