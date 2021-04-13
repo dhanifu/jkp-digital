@@ -28,7 +28,8 @@
                                         </div>
                                     </div>
                                     <div class="float-right">
-                                        <button class="btn btn-light btn-circle btn-md" onclick="detail('{{$r->id}}')">
+                                        <button class="btn btn-light btn-circle btn-md"
+                                            onclick="document.location.href='{{ route('kesiswaan.student', [request()->jenisJkp,$r->id]) }}'">
                                             <i class="fas fa-chevron-right fa-lg"></i>
                                         </button>
                                     </div>
@@ -49,14 +50,3 @@
         </div>
     </div>      
 </div>
-
-@push('script')
-    <script>
-        function detail(id_rayon){
-            let urls = '{{ route('kesiswaan.student', [request()->jenisJkp, ':id']) }}'
-            url = urls.replace(':id', id_rayon)
-
-            document.location.href=url
-        };
-    </script>
-@endpush
