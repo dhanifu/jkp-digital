@@ -53,9 +53,8 @@
 @push('script')
     <script>
         function detail(id_rayon){
-            let arg = '{{ request()->jenisJkp }}/r/' + id_rayon
-            let urls = '{{ route('kesiswaan.student', ':arg') }}'
-            url = urls.replace(':arg', arg)
+            let urls = '{{ route('kesiswaan.student', [request()->jenisJkp, ':id']) }}'
+            url = urls.replace(':id', id_rayon)
 
             document.location.href=url
         };
