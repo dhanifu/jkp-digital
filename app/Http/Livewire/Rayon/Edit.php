@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Rayon;
 
 use App\Models\Teacher;
 use App\Models\Rayon;
+use App\Models\User;
 use Livewire\Component;
 
 class Edit extends Component
@@ -40,11 +41,9 @@ class Edit extends Component
 
     public function render(Teacher $teacher)
     {
-        $roles = \Spatie\Permission\Models\Role::all();
-        $users = \App\Models\User::with('roles', 'teacher')->get();
-        $pembimbings = $users->reject(function ($user, $key) {
-            return $user->hasRole(['kesiswaan', 'admin']);
-        });
+        $pembimbings = User::select('id', 'email', 'pemilik_id')->with('teacher:id,user_id,name')->whereHas('roles', function ($q) {
+            $q->where('name', 'pembimbing');
+        })->get();
 
         return view('livewire.rayon.edit', compact('pembimbings'));
     }
