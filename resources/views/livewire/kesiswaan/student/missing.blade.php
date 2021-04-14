@@ -26,6 +26,7 @@
                     <th style="width: 5px">#</th>
                     <th>Nama</th>
                     <th>NIS</th>
+                    <th>Kelas</th>
                     <th>Rombel</th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $s['name'] }}</td>
                         <td>{{ $s['nis'] }}</td>
+                        <td>{{ $s['kelas'] }}</td>
                         <td>{{ $s['rombel']['name'] }}</td>
                     </tr>
                 @empty

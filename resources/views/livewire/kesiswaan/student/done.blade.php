@@ -26,6 +26,7 @@
                     <th style="width: 5px">#</th>
                     <th>Nama</th>
                     <th>NIS</th>
+                    <th>Kelas</th>
                     <th>Rombel</th>
                     <th>#</th>
                 </tr>
@@ -36,6 +37,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $done->name }}</td>
                         <td>{{ $done->nis }}</td>
+                        <td>{{ $done->kelas }}</td>
                         <td>{{ $done->rombel->name }}</td>
                         <td>
                             <button class="btn btn-info">Detail</button>
