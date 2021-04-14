@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="float-right">
                                         <button class="btn btn-light btn-circle btn-md"
-                                            onclick="document.location.href='{{ route('kesiswaan.student', [request()->jenisJkp,$r->id]) }}'">
+                                            onclick="document.location.href='{{ route('kesiswaan.student', [$jenisJkp,$r->id]) }}'">
                                             <i class="fas fa-chevron-right fa-lg"></i>
                                         </button>
                                     </div>
@@ -40,7 +40,11 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body py-3">
-                                    <h2>Kosong</h2>
+                                    @if($namaRayon != null)
+                                        <h2>Tidak dapat menemukan rayon <i>{{ $namaRayon }}</i></h2>
+                                    @else
+                                        <h2>Kosong</h2>
+                                    @endif
                                 </div>
                             </div>
                         </div>
