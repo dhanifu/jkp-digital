@@ -8,10 +8,11 @@ use App\Models\Rayon as RayonModel;
 class Rayon extends Component
 {
     public $namaRayon;
+    public $jenisJkp;
 
-    public function render(RayonModel $rayon)
+    public function render()
     {
-        $rayon = $rayon->select('id', 'teacher_id', 'name')->with('teacher:id,name')->orderBy('name');
+        $rayon = RayonModel::select('id', 'teacher_id', 'name')->with('teacher:id,name')->orderBy('name');
         $search = $this->namaRayon;
 
         if ($search != null) {
