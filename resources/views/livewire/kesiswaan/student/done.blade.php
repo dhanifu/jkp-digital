@@ -45,7 +45,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" align="center">Kosong</td>
+                        <td colspan="6" align="center">Kosong</td>
                     </tr>
                 @endforelse
             </tbody>
