@@ -53,7 +53,15 @@
                                     <br>
                                 @endfor
                                 <br>
-                                <button class="btn bg-red-600 text-white rounded" onclick="remove()" wire:click="$emit('delete', '{{ $jkp->id }}')">Unsubmit</button>
+                                <button class="btn bg-red-600 text-white rounded w-32 shadow" onclick="remove()"
+                                        wire:click="$emit('delete', '{{ $jkp->id }}')">
+                                    Unsubmit
+                                    <span class="float-right">
+                                        <div wire:loading class="spinner-border spinner-border-sm" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </span>
+                                </button>
                             </div>
                         @endif
                     </div>
