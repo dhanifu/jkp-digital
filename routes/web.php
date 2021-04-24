@@ -51,6 +51,7 @@ Route::name('student.')->middleware('auth', 'role:student')->group(function () {
     Route::view('to-do', 'student.todo.index')->name('to-do.index');
     Route::view('assignments', 'student.assignment.index')->name('assignment.index');
     Route::view('assignments/{id}/details', 'student.assignment.detail')->name('assignments.detail');
+    Route::view('/profile', 'student.settings.profile')->name('profile');
 });
 
 Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(function () {

@@ -88,6 +88,14 @@
                             <span class="list">Assignments</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('student.profile') }}" class="{{ request()->is('profile/*') || request()->is('profile')? ' active' : '' }}">
+                            <span class="icon{{ request()->is('profile') || request()->is('profile/*')? ' active' : '' }}">
+                                <i class="fas fa-tasks"></i>
+                            </span>
+                            <span class="list">Profile</span>
+                        </a>
+                    </li>
                 @elserole('kesiswaan')
                     <li>
                         <a href="{{ route('home') }}" class="{{ request()->is('home')? ' active' : '' }}">
