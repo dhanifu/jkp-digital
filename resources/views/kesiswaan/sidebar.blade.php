@@ -1,7 +1,7 @@
 <li>
     <a href="{{ route('kesiswaan.rayon') }}" 
-        class="{{ request()->is('rayon') || request()->is('rayon/*') ? ' active' : '' }}">
-        <span class="icon{{ request()->is('rayon') || request()->is('rayon/*') ? ' active' : '' }}">
+        class="{{ request()->is('kesiswaan/rayon') || request()->is('kesiswaan/rayon/*') ? ' active' : '' }}">
+        <span class="icon{{ request()->is('kesiswaan/rayon') || request()->is('kesiswaan/rayon/*') ? ' active' : '' }}">
             <i class="fas fa-tasks"></i>
         </span>
         <span class="list">Rayon</span>
@@ -9,8 +9,8 @@
 </li>
 <li>
     <a href="{{ route('kesiswaan.siswa') }}" 
-        class="{{ request()->is('siswa') || request()->is('siswa/*') ? ' active' : '' }}">
-        <span class="icon{{ request()->is('siswa') || request()->is('siswa/*') ? ' active' : '' }}">
+        class="{{ request()->is('kesiswaan/siswa') || request()->is('kesiswaan/siswa/*') ? ' active' : '' }}">
+        <span class="icon{{ request()->is('kesiswaan/siswa') || request()->is('kesiswaan/siswa/*') ? ' active' : '' }}">
             <i class="fas fa-tasks"></i>
         </span>
         <span class="list">Siswa</span>
