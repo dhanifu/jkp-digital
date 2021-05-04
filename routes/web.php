@@ -64,7 +64,7 @@ Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(funct
     });
 });
 
-Route::name('kesiswaan.')->middleware(['auth', 'role:kesiswaan'])->group(function () {
+Route::prefix('kesiswaan')->name('kesiswaan.')->middleware(['auth', 'role:kesiswaan'])->group(function () {
     Route::view('/rayon', 'kesiswaan.rayon')->name('rayon');
     Route::view('/rayon/{rayon}', 'kesiswaan.student')->name('student');
 
