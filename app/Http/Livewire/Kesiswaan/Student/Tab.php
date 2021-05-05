@@ -8,7 +8,6 @@ use Livewire\Component;
 class Tab extends Component
 {
     public $rayon_id;
-    public $jenisJkp;
 
     public function render()
     {
