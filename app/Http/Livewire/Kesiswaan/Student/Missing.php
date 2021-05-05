@@ -12,7 +12,6 @@ class Missing extends Component
     public $weeks;
     public $minggu_ke;
     public $perPage = 10;
-    public $jenis_jkp;
 
     protected $listeners = [
         'refreshMissing' => '$refresh',
@@ -34,15 +33,9 @@ class Missing extends Component
             $minggu_ke = $this->weeks[0]->minggu_ke;
         }
 
-        $student = Student::select('id', 'user_id', 'nis', 'name', 'kelas', 'rayon_id', 'rombel_id')
+        $students = Student::select('id', 'user_id', 'nis', 'name', 'kelas', 'rayon_id', 'rombel_id')
             ->where('rayon_id', $rayon_id)
-            ->with('akun:id,email,pemilik_id', 'rombel')->orderBy('name', 'ASC');
-
-        if ($this->jenis_jkp == "pramuka") {
-            $students = $student->where('kelas', "10")->get();
-        } else {
-            $students = $student->get();
-        }
+            ->with('akun:id,email,pemilik_id', 'rombel')->orderBy('name', 'ASC')->get();
 
         $jkp_dones = Jkp::with('assignment')->whereHas('assignment', function ($q) use ($minggu_ke) {
             $q->where('minggu_ke', $minggu_ke);

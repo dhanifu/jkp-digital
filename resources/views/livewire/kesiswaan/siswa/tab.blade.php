@@ -47,10 +47,10 @@
         <div class="card-body m-0">
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane py-3 fade show active" id="done" role="tabpanel" aria-labelledby="done-tab">
-                    @livewire('kesiswaan.student.done', ['weeks' => $weeks, 'rayon_id' => $rayon_id])
+                    @livewire('kesiswaan.siswa.done', ['weeks' => $weeks])
                 </div>
                 <div class="tab-pane py-3 fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">
-                    @livewire('kesiswaan.student.missing', ['weeks' => $weeks, 'rayon_id' => $rayon_id])
+                    @livewire('kesiswaan.siswa.missing', ['weeks' => $weeks])
                 </div>
             </div>
         </div>
@@ -78,8 +78,8 @@
                 minggu_ke: $("#minggu_ke").val()
             }
 
-            let url = '{{ route('kesiswaan.export-excel', ':id') }}'
-            link = url.replace(':id', '{{ request()->rayon }}') + "?" + $.param(query)
+            let url = '{{ route('kesiswaan.export-all') }}'
+            link = url + "?" + $.param(query)
 
             window.location = link
         })

@@ -51,6 +51,7 @@ Route::name('student.')->middleware('auth', 'role:student')->group(function () {
     Route::view('to-do', 'student.todo.index')->name('to-do.index');
     Route::view('assignments', 'student.assignment.index')->name('assignment.index');
     Route::view('assignments/{id}/details', 'student.assignment.detail')->name('assignments.detail');
+    Route::view('/profile', 'student.settings.profile')->name('profile');
 });
 
 Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(function () {
@@ -58,13 +59,18 @@ Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(funct
         Route::view('', 'pembimbing.rayon')->name('index');
         Route::name('student.')->group(function () {
             Route::view('/{id}', 'pembimbing.students.index')->name('index');
-            Route::get('/{id}/export-to-excel', 'Pembimbing\RekapitulasiController@exportExcel')->name('export-excel');
+            Route::get('/{id}/export-to-excel', 'RekapitulasiController@exportExcel')->name('export-excel');
         });
     });
 });
 
-Route::name('kesiswaan.')->middleware(['auth', 'role:kesiswaan'])->group(function () {
-    Route::view('/{jenisJkp}', 'kesiswaan.rayon')->name('rayon');
-    Route::view('/{jenisJkp}/r/{rayon}', 'kesiswaan.student')->name('student');
-    Route::view('/{jenisJkp}/r/{rayon}/s/{student}/details', 'kesiswaan.student-detail')->name('student-detail');
+Route::prefix('kesiswaan')->name('kesiswaan.')->middleware(['auth', 'role:kesiswaan'])->group(function () {
+    Route::view('/rayon', 'kesiswaan.rayon')->name('rayon');
+    Route::view('/rayon/{rayon}', 'kesiswaan.student')->name('student');
+
+    Route::view('/siswa', 'kesiswaan.siswa')->name('siswa');
+    Route::view('/rayon/s/{student}/details', 'kesiswaan.siswa-detail')->name('siswa-detail');
+
+    Route::get('/export-excel/{rayon}', 'RekapitulasiController@exportExcelFromKesiswaan')->name('export-excel');
+    Route::get('/export-excel', 'RekapitulasiController@exportAll')->name('export-all');
 });
