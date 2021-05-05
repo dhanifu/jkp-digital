@@ -13,13 +13,13 @@
 
             <form>
                 <div class="form-group">
-                    <label for="current_password">Current password</label>
-                    <input type="password" wire:model="current_password" class="form-control" id="current_password">
+                    <label for="password">Current password</label>
+                    <input type="password" wire:model="password" class="form-control" id="password">
                     <small><a href="#">Forgot your password?</a></small>
                 </div>
                 <div class="form-group">
-                    <label for="password">New password</label>
-                    <input type="password" wire:model="password" class="form-control" id="password">
+                    <label for="new_password">New password</label>
+                    <input type="password" wire:model="new_password" class="form-control" id="new_password">
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation">Verify password</label>

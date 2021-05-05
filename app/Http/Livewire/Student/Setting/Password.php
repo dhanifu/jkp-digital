@@ -18,6 +18,11 @@ class Password extends Component
         'alert'
     ];
 
+    public function update()
+    {
+        // 
+    }
+
     public function render()
     {
         return view('livewire.student.setting.password');

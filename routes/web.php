@@ -72,4 +72,5 @@ Route::prefix('kesiswaan')->name('kesiswaan.')->middleware(['auth', 'role:kesisw
     Route::view('/rayon/s/{student}/details', 'kesiswaan.siswa-detail')->name('siswa-detail');
 
     Route::get('/export-excel/{rayon}', 'RekapitulasiController@exportExcelFromKesiswaan')->name('export-excel');
+    Route::get('/export-excel', 'RekapitulasiController@exportAll')->name('export-all');
 });
