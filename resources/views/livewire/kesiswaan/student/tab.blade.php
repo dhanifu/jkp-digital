@@ -21,7 +21,7 @@
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-right p-0 pt-2" aria-labelledby="servicesDropdown"
-                            style="width: 200px">
+                            style="width: 250px">
 
                             <label class="dropdown-header">Minggu Ke</label>
                             <div class="dropdown-header">
@@ -47,10 +47,10 @@
         <div class="card-body m-0">
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane py-3 fade show active" id="done" role="tabpanel" aria-labelledby="done-tab">
-                    @livewire('kesiswaan.student.done', ['jenis_jkp' => $jenisJkp, 'weeks' => $weeks, 'rayon_id' => $rayon_id])
+                    @livewire('kesiswaan.student.done', ['weeks' => $weeks, 'rayon_id' => $rayon_id])
                 </div>
                 <div class="tab-pane py-3 fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">
-                    @livewire('kesiswaan.student.missing', ['jenis_jkp' => $jenisJkp, 'weeks' => $weeks, 'rayon_id' => $rayon_id])
+                    @livewire('kesiswaan.student.missing', ['weeks' => $weeks, 'rayon_id' => $rayon_id])
                 </div>
             </div>
         </div>
@@ -78,8 +78,8 @@
                 minggu_ke: $("#minggu_ke").val()
             }
 
-            let url = '{{ route('pembimbing.rayon.student.export-excel', ':id') }}'
-            link = url.replace(':id', '{{ request()->id }}') + "?" + $.param(query)
+            let url = '{{ route('kesiswaan.export-excel', ':id') }}'
+            link = url.replace(':id', '{{ request()->rayon }}') + "?" + $.param(query)
 
             window.location = link
         })
