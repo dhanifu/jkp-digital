@@ -1,7 +1,7 @@
 @extends('_layouts.app')
-@section('title' , ucwords(request()->jenisJkp))
+@section('title' , 'Rayon')
 @section('content')
     <div class="justify-content-center">
-        @livewire('kesiswaan.rayon', ['jenisJkp' => request()->jenisJkp])
+        @livewire('kesiswaan.rayon')
     </div>
 @endsection
