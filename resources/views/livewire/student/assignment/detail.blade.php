@@ -41,17 +41,22 @@
                                         'file_lingkungan', 'file_kesehatan'
                                     ];
                                 @endphp
-                                @if(Auth::user()->student->kelas == '10')
+
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    @if(Auth::user()->student->kelas == '10')
                                     @php $types[4] = 'file_pramuka'; @endphp
                                 @endif
                                 
                                 @for($i = 0; $i < count($types); $i++)
                                     <a href="{{ jkp($assignment->minggu_ke, $jkp->user->student->rayon->name, $types[$i],$jkp[$types[$i]]) }}" 
-                                        class="text-blue-700" target="_blank">
-                                        {{ $jkp[$types[$i]] }}
+                                        class="p-2 shadow-md border rounded-md flex items-center hover:bg-gray-50" target="_blank">    
+                                        <img src="{{ jkp($assignment->minggu_ke, $jkp->user->student->rayon->name, $types[$i],$jkp[$types[$i]]) }}" alt="..." class="p-2 w-12 h-12 sm:w-24 sm:h-24">
+                                        <div class="p-2 text-md font-semibold">{{ $jkp[$types[$i]] }}</div>                                    
                                     </a>
-                                    <br>
+
                                 @endfor
+                                </div>
+                                
                                 <br>
                                 <button class="btn bg-red-600 text-white rounded w-32 shadow" onclick="remove()"
                                         wire:click="$emit('delete', '{{ $jkp->id }}')">
@@ -62,7 +67,7 @@
                                         </div>
                                     </span>
                                 </button>
-                            </div>
+                            </>
                         @endif
                     </div>
 
