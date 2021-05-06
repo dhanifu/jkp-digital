@@ -1,5 +1,5 @@
 <div>
-    <div class="card">
+    <div class="card shadow">
         <div class="card-header">
             <div class="card-actions float-right">
                 <div class="dropdown show">
