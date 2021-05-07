@@ -1,6 +1,11 @@
 <div>
     <div class="float-left">
-        <button wire:click="$refresh" class="btn btn-primary">Refresh</button>
+        <button wire:click="$refresh" class="btn btn-primary btn-circle btn-md shadow" style="margin-top: -2px" title="Refresh">
+            <i class="fas fa-redo-alt fa-lg" wire:target="$refresh" wire:loading.attr="hidden"></i>
+            <div wire:loading wire:target="$refresh" class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only text-lg">Loading...</span>
+            </div>
+        </button>
     </div>
 
     <div class="float-right">
@@ -11,12 +16,6 @@
                 </option>
             @endforeach
         </select>
-
-        {{-- <div class="btn-group-vertical">
-            <button class="btn btn-success ml-2" type="button">
-                Excel &nbsp;&nbsp; <i class="far fa-file-excel"></i>
-            </button>
-        </div> --}}
     </div>
 
     <div class="table-responsive">
