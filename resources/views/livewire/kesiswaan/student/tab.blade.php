@@ -56,32 +56,3 @@
         </div>
     </div>
 </div>
-
-@push('css')
-    <style>
-        @media only screen and (max-width:760px){
-            .dropdown {
-                margin-top: 10px;
-            }
-        }
-    </style>
-@endpush
-
-@push('script')
-    <script>
-        $(".dropdown-menu").click(function (e) {
-            e.stopPropagation()
-        })
-
-        $("#download-excel").click(function(){
-            let query = {
-                minggu_ke: $("#minggu_ke").val()
-            }
-
-            let url = '{{ route('kesiswaan.export-excel', ':id') }}'
-            link = url.replace(':id', '{{ request()->rayon }}') + "?" + $.param(query)
-
-            window.location = link
-        })
-    </script>
-@endpush
