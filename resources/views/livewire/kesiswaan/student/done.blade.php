@@ -9,7 +9,12 @@
     @else
         <div class="card-header border-0 p-0 d-flex bg-white">
             <h3 class="card-title">
-                <button wire:click="$refresh" class="btn btn-primary">Refresh</button>
+                <button wire:click="$refresh" class="btn btn-primary btn-circle btn-md shadow" style="margin-top: -2px" title="Refresh">
+                    <i class="fas fa-redo-alt fa-lg" wire:target="$refresh" wire:loading.attr="hidden"></i>
+                    <div wire:loading wire:target="$refresh" class="spinner-border spinner-border-sm" role="status">
+                        <span class="sr-only text-lg">Loading...</span>
+                    </div>
+                </button>
             </h3>
             <div class="input-group col-sm-6 ml-auto p-0">
                 <input type="search" id="search" class="form-control ml-3" placeholder="Search" wire:model="search">
