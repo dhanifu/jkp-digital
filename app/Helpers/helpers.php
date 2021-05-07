@@ -48,6 +48,11 @@ function profileImage()
     return $image;
 }
 
+function getRole()
+{
+    return $role = Auth::user()->roles[0]->name;
+}
+
 function getFirstName()
 {
     $fullname = getName();
