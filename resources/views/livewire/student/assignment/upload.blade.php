@@ -77,23 +77,39 @@
         </div>
 
         <div class="mt-4">
-            @if ($file_keagamaan!=null 
-                && $file_literasi!=null 
-                && $file_lingkungan!=null 
-                && $file_kesehatan!=null
-                || (Auth::user()->student->kelas == '10' && $file_pramuka!=null))
-                <button class="btn btn-primary text-white rounded w-32 shadow">
-                    Submit
-                    <span class="float-right">
-                        <div wire:loading wire:target="upload" class="spinner-border spinner-border-sm" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </span>
-                </button>
+            @if (Auth::user()->student->kelas == '10')
+                @if ($file_keagamaan!=null && $file_literasi!=null 
+                    && $file_lingkungan!=null && $file_kesehatan!=null
+                    && $file_pramuka!=null)
+                    <button class="btn btn-primary text-white rounded w-32 shadow">
+                        Submit
+                        <span class="float-right">
+                            <div wire:loading wire:target="upload" class="spinner-border spinner-border-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </span>
+                    </button>
+                @else
+                    <button class="btn btn-primary text-white rounded w-32 shadow" disabled>
+                        Submit
+                    </button>
+                @endif
             @else
-                <button class="btn btn-primary text-white rounded w-32 shadow" disabled>
-                    Submit
-                </button>
+                @if ($file_keagamaan!=null && $file_literasi!=null 
+                    && $file_lingkungan!=null && $file_kesehatan!=null)
+                    <button class="btn btn-primary text-white rounded w-32 shadow">
+                        Submit
+                        <span class="float-right">
+                            <div wire:loading wire:target="upload" class="spinner-border spinner-border-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </span>
+                    </button>
+                @else
+                    <button class="btn btn-primary text-white rounded w-32 shadow" disabled>
+                        Submit
+                    </button>
+                @endif
             @endif
         </div>
     </form>
