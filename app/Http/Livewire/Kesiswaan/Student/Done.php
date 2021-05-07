@@ -12,11 +12,29 @@ class Done extends Component
     public $weeks;
     public $minggu_ke;
     public $perPage = 10;
+    public $search = null;
+    public $detail = false;
+    public $siswa = null;
 
     protected $listeners = [
         'refreshDone' => '$refresh',
-        'load-more' => 'loadMore'
+        'load-more' => 'loadMore',
+        'closeDetail' => 'closeDetail',
     ];
+
+    public function showDetail($id)
+    {
+        $this->detail = true;
+        $this->siswa = Student::with(
+            'rombel:id,name',
+            'rayon:id,teacher_id,name',
+            'rayon.teacher:id,name'
+        )->find($id);
+    }
+    public function closeDetail()
+    {
+        $this->detail = false;
+    }
 
     public function loadMore()
     {
@@ -27,10 +45,19 @@ class Done extends Component
     {
         $minggu_ke = $this->minggu_ke;
         $rayon_id = $this->rayon_id;
+        $search = $this->search;
 
-        $students = Student::select('id', 'user_id', 'nis', 'name', 'kelas', 'rayon_id', 'rombel_id')
-            ->where('rayon_id', $rayon_id)
-            ->with('akun:id,email,pemilik_id')->orderBy('name', 'ASC')->get();
+        if ($search != null) {
+            $students = Student::select('id', 'user_id', 'nis', 'name', 'kelas', 'rayon_id', 'rombel_id')
+                ->where('rayon_id', $rayon_id)
+                ->where('nis', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%")
+                ->with('akun:id,email,pemilik_id')->orderBy('name', 'ASC')->get();
+        } else {
+            $students = Student::select('id', 'user_id', 'nis', 'name', 'kelas', 'rayon_id', 'rombel_id')
+                ->where('rayon_id', $rayon_id)
+                ->with('akun:id,email,pemilik_id')->orderBy('name', 'ASC')->get();
+        }
 
         if ($minggu_ke == null) {
             $minggu_ke = $this->weeks[0]->minggu_ke;
