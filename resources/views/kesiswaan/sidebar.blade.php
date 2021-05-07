@@ -7,12 +7,3 @@
         <span class="list">Rayon</span>
     </a>
 </li>
-<li>
-    <a href="{{ route('kesiswaan.siswa') }}" 
-        class="{{ request()->is('kesiswaan/siswa') || request()->is('kesiswaan/siswa/*') ? ' active' : '' }}">
-        <span class="icon{{ request()->is('kesiswaan/siswa') || request()->is('kesiswaan/siswa/*') ? ' active' : '' }}">
-            <i class="fas fa-tasks"></i>
-        </span>
-        <span class="list">Siswa</span>
-    </a>
-</li>
