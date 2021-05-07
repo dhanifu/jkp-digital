@@ -65,11 +65,12 @@ Route::name('pembimbing.')->middleware(['auth', 'role:pembimbing'])->group(funct
 });
 
 Route::prefix('kesiswaan')->name('kesiswaan.')->middleware(['auth', 'role:kesiswaan'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('kesiswaan.home');
+    });
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::view('/rayon', 'kesiswaan.rayon')->name('rayon');
     Route::view('/rayon/{rayon}', 'kesiswaan.student')->name('student');
-
-    Route::view('/siswa', 'kesiswaan.siswa')->name('siswa');
-    Route::view('/rayon/s/{student}/details', 'kesiswaan.siswa-detail')->name('siswa-detail');
 
     Route::get('/export-excel/{rayon}', 'RekapitulasiController@exportExcelFromKesiswaan')->name('export-excel');
     Route::get('/export-excel', 'RekapitulasiController@exportAll')->name('export-all');
