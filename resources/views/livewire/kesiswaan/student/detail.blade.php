@@ -8,12 +8,6 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </button>
-            <button wire:click="$refresh" class="btn btn-secondary btn-circle btn-md shadow" title="Refresh">
-                <i class="fas fa-redo-alt fa-lg" wire:target="$refresh" wire:loading.attr="hidden"></i>
-                <div wire:loading wire:target="$refresh" class="spinner-border spinner-border-sm" role="status">
-                    <span class="sr-only text-lg">Loading...</span>
-                </div>
-            </button>
 
             <div class="mt-3">
                 <div class="form-row col-md-12">
