@@ -1,7 +1,7 @@
 <div>
     <div class="card border-0">
         <div class="card-body p-0">
-            <button class="btn btn-secondary btn-circle btn-md shadow" title="Kembali"
+            <button class="btn btn-secondary btn-circle btn-md shadow" style="margin-top: -2px" title="Kembali"
                 wire:click="$emit('closeDetail')">
                 <i class="fas fa-chevron-left fa-lg" wire:target="$emit('closeDetail')" wire:loading.attr="hidden"></i>
                 <div wire:loading wire:target="$emit('closeDetail')" class="spinner-border spinner-border-sm" role="status">
