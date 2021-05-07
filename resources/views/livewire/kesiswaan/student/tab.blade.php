@@ -46,10 +46,10 @@
 
         <div class="card-body m-0">
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane py-3 fade show active" id="done" role="tabpanel" aria-labelledby="done-tab">
+                <div class="tab-pane fade show active" id="done" role="tabpanel" aria-labelledby="done-tab">
                     @livewire('kesiswaan.student.done', ['weeks' => $weeks, 'rayon_id' => $rayon_id])
                 </div>
-                <div class="tab-pane py-3 fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">
+                <div class="tab-pane fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">
                     @livewire('kesiswaan.student.missing', ['weeks' => $weeks, 'rayon_id' => $rayon_id])
                 </div>
             </div>
