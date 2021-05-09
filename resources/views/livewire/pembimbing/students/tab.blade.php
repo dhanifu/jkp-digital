@@ -82,18 +82,6 @@
             link = url.replace(':id', '{{ request()->id }}') + "?" + $.param(query)
 
             window.location = link
-            
-            // $.ajax({
-            //     url: link,
-            //     type: 'get',
-            //     responseType: 'blob',
-            //     data: {
-            //         minggu_ke: query.minggu_ke
-            //     }
-            // }).then((response) => {
-            //     const url = window.URL.createObjectURL(new Blob([response.data]))
-            //     const link = document.createElement('a')
-            // })
         })
     </script>
 @endpush
