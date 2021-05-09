@@ -12,8 +12,8 @@
         <div class="card-body" style="padding: 10px 10px 10px">
             <div class="row">
                 @forelse($missing as $m)
-                    <div class="col-md-12 mb-2">
-                        <div class="card shadow-sm">
+                    <div class="col-md-12 mb-3">
+                        <div class="card list-jkp" onclick="detail('{{$m->id}}')">
                             <div class="card-body">
                                 <div class="float-left">
                                     <div class="card-title">
