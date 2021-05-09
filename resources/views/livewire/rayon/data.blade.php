@@ -4,17 +4,33 @@
 		<livewire:rayon.create />
 	</div>
 	<div>
-		@if (session()->has('success'))
-			<div class="alert alert-success alert-dismissible">
-				<span>{{ session('success') }}</span>
-				<button class="close" data-dismiss="alert">&times;</button>
-			</div>
-		@endif
 		<div class="card shadow">
 			<div class="card-header py-3">
-				<h2 class="card-title h6 font-weight-bold text-primary m-0">Data Rayon</h2>
+				<div class="row col-md-12 mx-auto p-0">
+					<div class="col-md-6 px-0">
+						<h2 class="card-title h6 font-weight-bold text-primary m-0">
+							Data Rayon
+						</h2>
+					</div>
+					<div class="col-md-6 px-0">
+						<div class="inputcontainer float-right">
+							<input type="search" class="form-control" placeholder="Search" wire:model="search">
+							<div class="icon-container">
+								<div wire:loading wire:target="search">
+									<i class="loader"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="card-body">
+				@if (session()->has('success'))
+					<div class="alert alert-success alert-dismissible">
+						<span>{{ session('success') }}</span>
+						<button class="close" data-dismiss="alert">&times;</button>
+					</div>
+				@endif
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -28,7 +44,7 @@
 						<tbody>
 							@forelse ($rayons as $rayon)
 								<tr>
-									<td>{{ $loop->iteration }}</td>
+									<td>{{ $loop->iteration + $rayons->firstItem() - 1 }}</td>
 									<td>{{ $rayon->name }}</td>
 									<td>{{ $rayon->teacher->name }}</td>
 									<td>
@@ -44,7 +60,12 @@
 						</tbody>
 					</table>
 				</div>
-				{{ $rayons->links() }}
+				<div class="row col-12">
+					{{ $rayons->links('') }}
+					<div wire:loading class="spinner-border spinner-border-sm my-auto ml-2" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
