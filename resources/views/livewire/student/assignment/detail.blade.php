@@ -54,7 +54,7 @@
                                 @endif
                                 
                                 @for($i = 0; $i < count($types); $i++)
-                                    <div class="card shadow bg-gray-50 hover:bg-gray-100">
+                                    <div class="card shadow-sm detail-jkp">
                                         <a href="{{ jkp($assignment->minggu_ke, $jkp->user->student->rayon->name, $types[$i],$jkp[$types[$i]]) }}" target="_blank"
                                             class="no-underline hover:no-underline">
                                             <div class="card-body">
@@ -62,7 +62,7 @@
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <img src="{{ jkp($assignment->minggu_ke, $jkp->user->student->rayon->name, $types[$i],$jkp[$types[$i]]) }}"
-                                                                class="detail-img">
+                                                                class="detail-img shadow-sm">
                                                         </div>
                                                         <div class="col-md-8 teks">
                                                             <div class="align-middle">
@@ -123,5 +123,16 @@
 		const remove = function () {
 			return confirm('Apakah Anda Yakin?') || event.stopImmediatePropagation()
 		}
+
+        $(document).ready(function(){
+            $(".detail-jkp").css({transition: "all 0.1s ease-in-out"});
+            $(".detail-jkp" ).hover(
+                function() {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer'); 
+                }, function() {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+        })
 	</script>
 @endpush
