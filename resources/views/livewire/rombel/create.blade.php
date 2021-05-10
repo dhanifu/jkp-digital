@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label>Jurusan</label>
                 <select style="width: 100%" class="form-control  @error('major_id') is-invalid @enderror" wire:model="major_id">
-                    <option>-- Select --</option>
+                    <option value="">-- Select --</option>
                     @foreach ($majors as $major)
                         <option value="{{ $major->id }}">{{ $major->name }}</option>
                     @endforeach
@@ -26,7 +26,14 @@
                 <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
-            <button class="btn btn-primary shadow" type="submit">Tambah</button>
+            <button class="btn btn-primary shadow" type="submit" {{$name==null||$major_id==null ? 'disabled' : ''}}>
+                Tambah
+                <span class="float-right pl-2">
+                    <div wire:loading wire:target="store" class="spinner-border spinner-border-sm" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </span>
+            </button>
         </form>
     </div>
 </div>
