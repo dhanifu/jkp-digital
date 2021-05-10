@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Major;
 
 use App\Models\Major;
+use App\Models\Rombel;
+use App\Models\Student;
 use Livewire\WithPagination;
 use Livewire\Component;
 
@@ -16,6 +18,13 @@ class Data extends Component
 
     public function delete(Major $major)
     {
+        $rombels = Rombel::where('major_id', $major->id);
+
+        foreach ($rombels->get() as $value) {
+            Student::where('rombel_id', $value->id)->delete();
+        }
+
+        $rombels->delete();
         $major->delete();
 
         $this->refresh('Sukses Menghapus Jurusan');
