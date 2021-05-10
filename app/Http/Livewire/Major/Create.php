@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Livewire\Major;
-use App\Models\Major;
 
+use App\Models\Major;
 use Livewire\Component;
 
 class Create extends Component
@@ -16,7 +16,7 @@ class Create extends Component
     public function store(Major $major)
     {
         $data = $this->validate();
-        
+
         $major->create($data);
 
         $this->emit('refresh', 'Sukses Menambah Jurusan');
