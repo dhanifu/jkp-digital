@@ -13,7 +13,7 @@ jQuery(function ($) {
             }
         },
         columns: [
-            { data: 'DT_RowIndex' },
+            { data: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'name' },
             { data: 'email' },
             { data: 'role' },
