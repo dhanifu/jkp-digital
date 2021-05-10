@@ -6,14 +6,17 @@
 	<div>
 		<div class="card shadow">
 			<div class="card-header py-3">
-				<div class="row col-md-12 mx-auto p-0">
+				<div class="row mx-auto p-0">
 					<div class="col-md-6 px-0">
 						<h2 class="card-title h6 font-weight-bold text-primary m-0">
 							Data Rayon
+							<div wire:loading class="spinner-border spinner-border-sm ml-2 text-dark" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
 						</h2>
 					</div>
 					<div class="col-md-6 px-0">
-						<div class="inputcontainer float-right">
+						<div class="inputcontainer w-48 float-right">
 							<input type="search" class="form-control" placeholder="Search" wire:model="search">
 							<div class="icon-container">
 								<div wire:loading wire:target="search">
@@ -59,12 +62,7 @@
 							@endforelse
 						</tbody>
 					</table>
-				</div>
-				<div class="row col-12">
 					{{ $rayons->links('') }}
-					<div wire:loading class="spinner-border spinner-border-sm my-auto ml-2" role="status">
-						<span class="sr-only">Loading...</span>
-					</div>
 				</div>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 <div>
     @if ($isOpen)
     <div class="modal backdrop d-block">
-        <div class="modal-backdrop" style="background: rgba(0,0,0,.5);">
+        <div class="modal-backdrop" style="background: rgba(0,0,0,.5); backdrop-filter: blur(1px);">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <form wire:submit.prevent="update">
@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label>Pembimbing</label>
                                 <select wire:model="rayon.teacher_id" id="teacher_id" class="form-control @error('rayon.teacher_id') is-invalid @enderror">
-                                    <option>-- Pilih --</option>
+                                    <option value="">-- Pilih --</option>
                                     @php
                                         $array = [];
                                     @endphp
@@ -42,7 +42,14 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary shadow" type="submit">Edit</button>
+                            <button class="btn btn-primary shadow" type="submit" {{$rayon['name']==null||$rayon['teacher_id']==null ? 'disabled' : ''}}>
+                                Edit
+                                <span class="float-right pl-2">
+                                    <div wire:loading wire:target="update" class="spinner-border spinner-border-sm" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </span>
+                            </button>
                             <button type="button" class="btn btn-secondary shadow"
                                 wire:click="$set('isOpen', false)">Batal</button>
                         </div>
