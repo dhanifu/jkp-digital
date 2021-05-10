@@ -15,7 +15,7 @@ class CreateMajorsTable extends Migration
     {
         Schema::create('majors', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name')->unique();
+            $table->string('name')->unique()->collation('utf8_bin');
             $table->timestamps();
         });
     }

@@ -12,11 +12,11 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Nama</label>
-                                <input type="text" class="form-control @error('jurusan.name') is-invalid @enderror"
+                                <input type="text" class="form-control @error('major.name') is-invalid @enderror"
                                     wire:model="major.name" autofocus>
 
-                                @error('jurusan.name')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                                @error('major.name')
+                                    <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>

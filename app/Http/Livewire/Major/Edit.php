@@ -36,9 +36,8 @@ class Edit extends Component
         $this->reset('isOpen');
     }
 
-    public function render(Major $major)
+    public function render()
     {
-        $majors = $major->all();
-        return view('livewire.major.edit', compact('majors'));
+        return view('livewire.major.edit');
     }
 }
