@@ -27,7 +27,7 @@ class Create extends Component
 
     public function render(Major $major)
     {
-        $majors = $major->all();
+        $majors = $major->select('id', 'name')->get();
 
         return view('livewire.rombel.create', compact('majors'));
     }
