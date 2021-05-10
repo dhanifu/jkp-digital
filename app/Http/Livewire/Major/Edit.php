@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Major;
+
 use App\Models\Major;
 use Livewire\Component;
 
@@ -31,8 +32,8 @@ class Edit extends Component
 
         $this->major->save();
 
-        $this->reset('isOpen');
         $this->emit('refresh', 'Sukses Mengedit Jurusan');
+        $this->reset('isOpen');
     }
 
     public function render(Major $major)
