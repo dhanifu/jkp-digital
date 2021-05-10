@@ -30,10 +30,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" width="100%">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th style="width: 5%">No</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Aksi</th>
