@@ -33,7 +33,14 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary shadow" type="submit">Tambah</button>
+            <button class="btn btn-primary shadow" type="submit" {{-- $minggu_ke==null||$from_date==null||$to_date==null?'disabled':'' --}}>
+                Tambah
+                <span class="float-right pl-2">
+                    <div wire:loading wire:target="store" class="spinner-border spinner-border-sm" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </span>
+            </button>
         </form>
     </div>
 </div>
