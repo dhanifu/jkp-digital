@@ -33,8 +33,8 @@ class Edit extends Component
 
         $this->rombel->save();
 
-        $this->reset('isOpen');
         $this->emit('refresh', 'Sukses Mengedit Rombel');
+        $this->reset('isOpen');
     }
     public function render(Major $major)
     {

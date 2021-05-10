@@ -67,7 +67,7 @@ class StudentController extends Controller
     {
         $rayons = $rayon->all();
         $rombels = $rombel->all();
-        return view('admin.student.create', compact('rayons','rombels'));
+        return view('admin.student.create', compact('rayons', 'rombels'));
     }
 
     /**
@@ -138,6 +138,10 @@ class StudentController extends Controller
 
     public function import(): RedirectResponse
     {
+        $this->validate(request(), [
+            'excel_file' => 'required|max:10240|mimes:xlsx,xls', // max size=10mb, format .xlsx & .xls
+        ]);
+
         try {
             Excel::import(new StudentImport, request()->file('excel_file'));
         } catch (\Exception $ex) {
@@ -169,7 +173,7 @@ class StudentController extends Controller
     {
         $rayons = $rayon->all();
         $rombels = $rombel->all();
-        return view('admin.student.edit', compact('student','rayons','rombels'));
+        return view('admin.student.edit', compact('student', 'rayons', 'rombels'));
     }
 
     /**

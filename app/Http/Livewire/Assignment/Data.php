@@ -10,6 +10,8 @@ class Data extends Component
 {
     use WithPagination;
 
+    public $search = null;
+
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['refresh', 'delete', 'refreshData' => '$refresh'];
 
@@ -17,17 +19,21 @@ class Data extends Component
     {
         $assignment->delete();
 
-        $this->refresh('Sukses Menghapus Jurusan');
+        $this->refresh('Sukses Menghapus Assignment');
     }
 
     public function refresh(string $message)
     {
+        $this->reset('search');
         session()->flash('success', $message);
     }
 
     public function render(Assignment $assignment)
     {
-        $assignments = $assignment->latest()->paginate(5);
+        $search = $this->search;
+
+        $assignments = $assignment->where('minggu_ke', 'like', "%$search%")->latest()->paginate(5);
+
         return view('livewire.assignment.data', compact('assignments'));
     }
 }

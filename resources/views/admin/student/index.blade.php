@@ -30,10 +30,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" width="100%">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th style="width: 5%">No</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Aksi</th>
@@ -51,10 +51,10 @@
 @section('modal')
     <!-- Modal Excel -->
     <div class="modal fade" id="modalExcel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalExcelLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalExcelLabel">Upload Excel</h5>
+                    <h5 class="modal-title text-black" id="modalExcelLabel"><strong>Upload Excel</strong></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -63,6 +63,7 @@
                     @csrf
                     <div class="modal-body">
                         <input type="file" name="excel_file" class="form-control">
+                        <span class="text-danger text-sm">{{ $errors->first('excel_file') }}</span>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -79,6 +80,11 @@
 @endpush
 
 @push('script')
+    <script>
+        @if(count($errors) > 0)
+            $('#modalExcel').modal('show');
+        @endif
+    </script>
     <script src="{{ asset('libraries/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('libraries/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
