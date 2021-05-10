@@ -55,7 +55,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalExcelLabel">Upload Excel</h5>
+                    <h5 class="modal-title text-black" id="modalExcelLabel">Upload Excel</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -101,6 +101,11 @@
 @endpush
 
 @push('script')
+    <script>
+        @if(count($errors) > 0)
+            $('#modalExcel').modal('show');
+        @endif
+    </script>
     <script src="{{ asset('libraries/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('libraries/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 

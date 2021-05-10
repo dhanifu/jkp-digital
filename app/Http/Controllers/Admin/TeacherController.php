@@ -129,7 +129,7 @@ class TeacherController extends Controller
     public function import(): RedirectResponse
     {
         $this->validate(request(), [
-            'excel_file' => 'required',
+            'excel_file' => 'required|max:10240|mimes:xlsx,xls', // max size=10mb, format .xlsx & .xls
             'role' => 'required'
         ]);
 
