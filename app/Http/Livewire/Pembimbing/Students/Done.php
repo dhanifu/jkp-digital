@@ -15,11 +15,30 @@ class Done extends Component
     public $minggu_ke;
     public $perPage = 10;
     public $weeks;
+    public $search = null;
+    public $detail = false;
+    public $siswa = null;
 
     protected $listeners = [
         'refreshDone' => '$refresh',
-        'load-more' => 'loadMore'
+        'load-more' => 'loadMore',
+        'closeDetail' => 'closeDetail',
     ];
+
+    public function showDetail($id)
+    {
+        $this->detail = true;
+        $this->siswa = Student::with(
+            'rombel:id,name',
+            'rayon:id,teacher_id,name',
+            'rayon.teacher:id,name'
+        )->find($id);
+    }
+
+    public function closeDetail()
+    {
+        $this->detail = false;
+    }
 
     public function loadMore()
     {
@@ -29,13 +48,19 @@ class Done extends Component
     public function render()
     {
         $minggu_ke = $this->minggu_ke;
+        $search = $this->search;
 
         $pemray = Auth::user()->teacher;
 
         $rayon = Rayon::where('teacher_id', $pemray->id)->first();
 
         $students = Student::where('rayon_id', $rayon->id)
-            ->with('akun:id,email,pemilik_id')->get();
+            ->where('name', 'like', "%$search%")
+            ->orWhere('nis', 'like', "%$search%")
+            ->orWhere('kelas', 'like', "%$search%")
+            ->orWhereHas('rombel', function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%");
+            })->with('akun:id,email,pemilik_id')->get();
 
         if ($minggu_ke == null) {
             $minggu_ke = $this->weeks[0]->minggu_ke;
