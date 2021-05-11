@@ -46,42 +46,13 @@
 
         <div class="card-body m-0">
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane py-3 fade show active" id="done" role="tabpanel" aria-labelledby="done-tab">
+                <div class="tab-pane fade show active" id="done" role="tabpanel" aria-labelledby="done-tab">
                     @livewire('pembimbing.students.done', ['weeks' => $weeks])
                 </div>
-                <div class="tab-pane py-3 fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">
+                <div class="tab-pane fade" id="missing" role="tabpanel" aria-labelledby="missing-tab">
                     @livewire('pembimbing.students.missing', ['weeks' => $weeks])
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@push('css')
-    <style>
-        @media only screen and (max-width:760px){
-            .dropdown {
-                margin-top: 10px;
-            }
-        }
-    </style>
-@endpush
-
-@push('script')
-    <script>
-        $(".dropdown-menu").click(function (e) {
-            e.stopPropagation()
-        })
-
-        $("#download-excel").click(function(){
-            let query = {
-                minggu_ke: $("#minggu_ke").val()
-            }
-
-            let url = '{{ route('pembimbing.rayon.student.export-excel', ':id') }}'
-            link = url.replace(':id', '{{ request()->id }}') + "?" + $.param(query)
-
-            window.location = link
-        })
-    </script>
-@endpush
