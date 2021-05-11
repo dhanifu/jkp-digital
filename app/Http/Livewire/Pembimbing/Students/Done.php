@@ -54,13 +54,19 @@ class Done extends Component
 
         $rayon = Rayon::where('teacher_id', $pemray->id)->first();
 
-        $students = Student::where('rayon_id', $rayon->id)
-            ->where('name', 'like', "%$search%")
-            ->orWhere('nis', 'like', "%$search%")
-            ->orWhere('kelas', 'like', "%$search%")
-            ->orWhereHas('rombel', function ($q) use ($search) {
-                $q->where('name', 'like', "%$search%");
-            })->with('akun:id,email,pemilik_id')->get();
+        if ($search != null) {
+            $students = Student::where('rayon_id', $rayon->id)
+                ->where('name', 'like', "%$search%")
+                ->orWhere('nis', 'like', "%$search%")
+                ->orWhere('kelas', 'like', "%$search%")
+                ->orWhereHas('rombel', function ($q) use ($search) {
+                    $q->where('name', 'like', "%$search%");
+                })
+                ->with('akun:id,email,pemilik_id')->get();
+        } else {
+            $students = Student::where('rayon_id', $rayon->id)
+                ->with('akun:id,email,pemilik_id')->get();
+        }
 
         if ($minggu_ke == null) {
             $minggu_ke = $this->weeks[0]->minggu_ke;
