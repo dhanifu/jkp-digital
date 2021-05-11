@@ -55,7 +55,8 @@ class Done extends Component
         $rayon = Rayon::where('teacher_id', $pemray->id)->first();
 
         if ($search != null) {
-            $students = Student::where('rayon_id', $rayon->id)
+            $students = Student::select('id', 'user_id', 'nis', 'name', 'kelas', 'rayon_id', 'rombel_id')
+                ->where('rayon_id', $rayon->id)
                 ->where('name', 'like', "%$search%")
                 ->orWhere('nis', 'like', "%$search%")
                 ->orWhere('kelas', 'like', "%$search%")
@@ -64,7 +65,8 @@ class Done extends Component
                 })
                 ->with('akun:id,email,pemilik_id')->get();
         } else {
-            $students = Student::where('rayon_id', $rayon->id)
+            $students = Student::select('id', 'user_id', 'nis', 'name', 'kelas', 'rayon_id', 'rombel_id')
+                ->where('rayon_id', $rayon->id)
                 ->with('akun:id,email,pemilik_id')->get();
         }
 
