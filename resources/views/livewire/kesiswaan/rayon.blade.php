@@ -16,7 +16,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 ml-auto">
+                    {{-- <div class="col-md-2 ml-auto">
                         <div class="dropdown" id="export-dropdown">
                             <button class="btn btn-secondary rounded-0 shadow-sm" id="servicesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="card-body">
