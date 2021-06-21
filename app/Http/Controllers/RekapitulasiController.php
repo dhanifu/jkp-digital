@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\RekapitulasiExport;
+use App\Exports\Kesiswaan\RekapSemuaMultisheet;
 use App\Exports\RekapitulasiMultiSheetExport;
 use App\Http\Controllers\Controller;
 use App\Models\Jkp;
 use App\Models\Rayon;
 use App\Models\Student;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 
 class RekapitulasiController extends Controller
@@ -197,6 +195,9 @@ class RekapitulasiController extends Controller
             }
         }
 
-        dd($dones, $siswa_missings);
+        return $this->excel->download(
+            new RekapSemuaMultisheet($minggu_ke, $dones, $siswa_missings),
+            "Rekapitulasi-Minggu_ke_{$minggu_ke}.xlsx"
+        );
     }
 }
